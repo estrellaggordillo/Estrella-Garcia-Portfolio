@@ -671,7 +671,7 @@
         <line x1="3" y1="17" x2="21" y2="17"></line>
       </svg>
       <div class="burger-menu">
-        <a href="#work">Work</a>
+        <a href="#projects">Work</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </div>
@@ -704,7 +704,7 @@
 </div>
 
 <!-- ── SELECTED WORK ──────────────────────────────────────────── -->
-<section id="work" class="section">
+<section id="projects" class="section">
   <div class="section-header reveal">
     <div>
       <div class="section-eyebrow">Selected Work · 2023–2026</div>
@@ -718,7 +718,7 @@
     <!-- 1: PAQR — full width -->
     <a class="work-card reveal" href="paqr.html" tabindex="0">
       <div class="work-card__thumb">
-        <img src="PAQR_Image 2png.png" alt="PAQR">
+        <img src="paqr thumbnail.png" alt="PAQR">
       </div>
       <div class="work-card__meta">
         <div class="work-card__info">
@@ -1052,6 +1052,18 @@
     card.addEventListener('mouseleave', function () { cursor.classList.remove('active'); });
   });
 
+  // ── Stop video flicker before navigating to a project ────────
+  cards.forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      var href = card.getAttribute('href');
+      if (!href || href === '#') return;
+      e.preventDefault();
+      var video = document.getElementById('heroVideo');
+      if (video) { video.pause(); video.style.opacity = '0'; }
+      setTimeout(function () { window.location.href = href; }, 100);
+    });
+  });
+
   // ── Service rows reveal ────────────────────────────────────
   var srvEls = document.querySelectorAll('.srv-reveal');
   var srvIO  = new IntersectionObserver(function (entries) {
@@ -1166,6 +1178,7 @@
   // ── Scroll to top before leaving — prevents bfcache caching a mid-scroll state
   // (also disables bfcache in most browsers, forcing a clean reload on back/forward)
   window.onbeforeunload = function () {
+    sessionStorage.setItem('scrollPos', window.scrollY);
     window.scrollTo(0, 0);
   };
 
@@ -1177,6 +1190,11 @@
         initScrollAnim();
         initStarAnim();
         ScrollTrigger.refresh();
+        var savedPos = sessionStorage.getItem('scrollPos');
+        if (savedPos) {
+          window.scrollTo(0, parseInt(savedPos, 10));
+          sessionStorage.removeItem('scrollPos');
+        }
       });
     });
   });
