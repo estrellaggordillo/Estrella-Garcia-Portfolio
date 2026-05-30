@@ -990,7 +990,6 @@
     <div class="contact__divider"></div>
     <div class="contact__social">
       <a class="contact__social-link" href="https://www.linkedin.com/in/estrella-garc%C3%ADa-gordillo-a732ba122/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="contact__social-link" href="#" target="_blank" rel="noopener">Dribbble</a>
       <a class="contact__social-link" href="CV_Estrella García.png" target="_blank" rel="noopener">Read CV</a>
     </div>
   </div>
@@ -1191,9 +1190,15 @@
         initStarAnim();
         ScrollTrigger.refresh();
         var savedPos = sessionStorage.getItem('scrollPos');
-        if (savedPos) {
+        sessionStorage.removeItem('scrollPos');
+        if (window.location.hash) {
+          var hash = window.location.hash;
+          setTimeout(function () {
+            var target = document.querySelector(hash);
+            if (target) { target.scrollIntoView({ behavior: 'smooth' }); }
+          }, 300);
+        } else if (savedPos) {
           window.scrollTo(0, parseInt(savedPos, 10));
-          sessionStorage.removeItem('scrollPos');
         }
       });
     });
