@@ -710,7 +710,6 @@
       <div class="section-eyebrow">Selected Work · 2023–2026</div>
       <h2 class="section-title">PROJECTS</h2>
     </div>
-    <a class="section-link" href="#contact">All work →</a>
   </div>
 
   <div class="work-grid">
@@ -1051,15 +1050,13 @@
     card.addEventListener('mouseleave', function () { cursor.classList.remove('active'); });
   });
 
-  // ── Stop video flicker before navigating to a project ────────
+  // ── Stop video before navigating to a project ────────────────
   cards.forEach(function (card) {
-    card.addEventListener('click', function (e) {
-      var href = card.getAttribute('href');
-      if (!href || href === '#') return;
-      e.preventDefault();
+    card.addEventListener('click', function () {
       var video = document.getElementById('heroVideo');
+      var frame = document.getElementById('heroFrame');
       if (video) { video.pause(); video.style.opacity = '0'; }
-      setTimeout(function () { window.location.href = href; }, 100);
+      if (frame) { frame.style.background = 'transparent'; frame.style.boxShadow = 'none'; }
     });
   });
 
