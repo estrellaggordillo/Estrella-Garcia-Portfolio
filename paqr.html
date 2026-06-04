@@ -275,6 +275,12 @@
       color: var(--ink-60); line-height: 1.7;
     }
 
+    /* ─── DARK CONTENT SECTION ───────────────────────────────────── */
+    .cs--dark { background: var(--ink); border-top: none; }
+    .cs--dark .cs__heading { color: #fff; }
+    .cs--dark .cs__body { color: rgba(255,255,255,.65); }
+    .cs--dark .cs__body strong { color: #fff; }
+
     /* ─── OTHER PROJECTS ──────────────────────────────────────── */
     .other { padding: clamp(80px, 8vw, 120px) var(--pad-x); border-top: 1px solid var(--ink-20); }
     .other__label {
@@ -465,6 +471,15 @@
     <video autoplay loop muted playsinline style="width:100%;height:auto;display:block;margin-top: clamp(48px, 6vw, 80px);">
       <source src="paqr_whatdoes.mp4" type="video/mp4">
     </video>
+  </div>
+</section>
+
+<!-- ── DESIGN SYSTEM & FOUNDATIONS ────────────────────────────── -->
+<section class="cs cs--dark">
+  <h2 class="cs__heading reveal">DESIGN SYSTEM &amp;<br>FOUNDATIONS</h2>
+  <p class="cs__body reveal reveal-d1">Built from scratch as the sole designer, the PAQR Design System is structured for scale from day one. Foundations and components live in separate files — each with its own dedicated document — making it easier to evolve one without breaking the other. The token architecture covers color system, typography scale, spacing, and motion, all managed through Token Studio to bridge design directly into development. To scale faster without sacrificing consistency, I integrated AI into the workflow using Cursor — building components with all their states and variants in a fraction of the time.</p>
+  <div class="cs__images reveal">
+    <img class="img-full" src="paqr_foundations.png" alt="PAQR — Design System">
   </div>
 </section>
 
