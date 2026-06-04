@@ -1188,11 +1188,14 @@
         ScrollTrigger.refresh();
         var savedPos = sessionStorage.getItem('scrollPos');
         sessionStorage.removeItem('scrollPos');
-        if (window.location.hash) {
+        if (window.location.hash === '#projects') {
+          var target = document.querySelector('#projects');
+          if (target) { window.scrollTo(0, target.offsetTop); }
+        } else if (window.location.hash) {
           var hash = window.location.hash;
           setTimeout(function () {
-            var target = document.querySelector(hash);
-            if (target) { target.scrollIntoView({ behavior: 'smooth' }); }
+            var t = document.querySelector(hash);
+            if (t) { t.scrollIntoView({ behavior: 'smooth' }); }
           }, 300);
         } else if (savedPos) {
           window.scrollTo(0, parseInt(savedPos, 10));
