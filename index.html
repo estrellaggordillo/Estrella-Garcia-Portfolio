@@ -1050,13 +1050,14 @@
     card.addEventListener('mouseleave', function () { cursor.classList.remove('active'); });
   });
 
-  // ── Stop video before navigating to a project ────────────────
+  // ── Stop video and kill scroll animation before navigating ────
   cards.forEach(function (card) {
     card.addEventListener('click', function () {
+      ScrollTrigger.getAll().forEach(function (st) { st.kill(); });
       var video = document.getElementById('heroVideo');
       var frame = document.getElementById('heroFrame');
       if (video) { video.pause(); video.style.opacity = '0'; }
-      if (frame) { frame.style.background = 'transparent'; frame.style.boxShadow = 'none'; }
+      if (frame) { gsap.set(frame, { clearProps: 'all' }); frame.style.background = 'transparent'; }
     });
   });
 
@@ -1175,7 +1176,6 @@
   // (also disables bfcache in most browsers, forcing a clean reload on back/forward)
   window.onbeforeunload = function () {
     sessionStorage.setItem('scrollPos', window.scrollY);
-    window.scrollTo(0, 0);
   };
 
   // ── Unconditional reset + reinit on every pageshow (initial load and bfcache restore)
