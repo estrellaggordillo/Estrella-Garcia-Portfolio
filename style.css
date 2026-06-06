@@ -38,6 +38,7 @@
       padding: 24px var(--pad-x) 0; gap: 12px;
       animation: fadeUp .7s cubic-bezier(.2,.8,.2,1) both;
     }
+    .mobile-video-wrap { display: none; }
     @media (max-width: 700px) {
       .top-bar { grid-template-columns: 1fr; gap: 2px; padding-top: 16px; }
       .top-bar__col { display: none !important; }
@@ -45,6 +46,8 @@
       .hero__eyebrow-row { display: none !important; }
       .hero { min-height: auto !important; padding-top: 120px !important; padding-bottom: 60px !important; }
       .hero__headline { white-space: normal !important; font-size: clamp(60px, 18vw, 120px) !important; text-align: left !important; width: 100% !important; }
+      .mobile-video-wrap { display: block; width: 100%; aspect-ratio: 16/9; overflow: hidden; }
+      .mobile-video-wrap video { width: 100%; height: 100%; object-fit: cover; display: block; }
     }
     .top-bar__brand { display: flex; flex-direction: column; gap: 3px; }
     .top-bar__name {
@@ -242,132 +245,34 @@
     @media (max-width: 700px) { .work-grid { grid-template-columns: 1fr; } }
 
     .work-card {
-      border-radius: var(--radius); overflow: hidden; cursor: none; display: block;
+      background: #171717; border-radius: 20px; overflow: hidden;
+      cursor: none; display: block;
       transition: transform .35s cubic-bezier(.2,.8,.2,1);
     }
-    .work-card:hover { transform: scale(1.012); }
-    .work-card--full { grid-column: 1 / -1; }
+    .work-card:hover { transform: scale(1.01); }
 
     .work-card__thumb {
-      aspect-ratio: 16/9; position: relative; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .work-card--full .work-card__thumb { aspect-ratio: 21/9; }
-    @media (max-width: 700px) { .work-card--full .work-card__thumb { aspect-ratio: 16/9; } }
-
-    /* ── thumb: Oxa ── */
-    .thumb-oxa { background: #0C1520; }
-    .thumb-oxa::before {
-      content: ''; position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse at 28% 72%, rgba(99,102,241,.38) 0%, transparent 58%),
-        radial-gradient(ellipse at 78% 22%, rgba(204,255,13,.12) 0%, transparent 48%);
-    }
-    .thumb-oxa__ui {
-      position: relative; z-index: 1; width: 62%; max-width: 480px;
-      border-radius: 10px; overflow: hidden;
-      background: #19243a; border: 1px solid rgba(255,255,255,.07);
-      box-shadow: 0 28px 64px rgba(0,0,0,.55);
-    }
-    .thumb-oxa__bar {
-      height: 28px; background: #101828; display: flex; align-items: center; padding: 0 14px; gap: 6px;
-    }
-    .thumb-oxa__dot { width: 8px; height: 8px; border-radius: 50%; }
-    .thumb-oxa__body { padding: 16px; display: grid; gap: 10px; }
-    .thumb-oxa__row { height: 8px; border-radius: 4px; background: rgba(255,255,255,.07); }
-    .thumb-oxa__card {
-      background: #1f2e4a; border-radius: 8px; padding: 14px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-    }
-    .thumb-oxa__stat { background: rgba(255,255,255,.06); border-radius: 6px; height: 40px; }
-
-    /* ── thumb: Nüma ── */
-    .thumb-numa { background: #180c0c; }
-    .thumb-numa::before {
-      content: ''; position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse at 65% 40%, rgba(234,89,70,.32) 0%, transparent 52%),
-        radial-gradient(ellipse at 18% 80%, rgba(204,255,13,.07) 0%, transparent 48%);
-    }
-    .thumb-numa__inner {
-      position: relative; z-index: 1;
-      display: flex; align-items: center; gap: 22px; width: 72%;
-    }
-    .thumb-numa__icon {
-      width: 76px; height: 76px; border-radius: 20px; flex-shrink: 0;
-      background: linear-gradient(135deg, #EA5946 0%, #c94f38 100%);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .thumb-numa__icon svg { width: 34px; height: 34px; fill: none; stroke: #fff; stroke-width: 1.5; }
-    .thumb-numa__text { flex: 1; }
-    .thumb-numa__label {
-      font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
-      text-transform: uppercase; color: rgba(255,255,255,.38); margin-bottom: 8px;
-    }
-    .thumb-numa__word {
-      font-family: var(--display); font-weight: 900;
-      font-size: clamp(22px, 3.2vw, 44px);
-      color: #fff; letter-spacing: -0.03em; text-transform: uppercase; line-height: 1;
+      margin: 10px 10px 0 10px;
+      border-radius: 14px; overflow: hidden;
+      aspect-ratio: 4/3; position: relative;
     }
 
-    /* ── thumb: Graft (branding) ── */
-    .thumb-graft { background: #EDE9E3; position: relative; overflow: hidden; }
-    .thumb-graft::before {
-      content: 'GRAFT';
-      font-family: "Big Shoulders Display", sans-serif; font-weight: 900;
-      font-size: clamp(80px, 18vw, 220px); color: rgba(0,0,0,.04);
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      white-space: nowrap; letter-spacing: -0.05em; line-height: 1;
-      pointer-events: none;
+    /* ── work card bar ── */
+    .work-card__bar {
+      background: #171717;
+      padding: 16px 20px;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
     }
-    .thumb-graft__logo {
-      position: relative; z-index: 1;
-      font-family: var(--display); font-weight: 900;
-      font-size: clamp(22px, 4.5vw, 54px);
-      color: var(--ink); letter-spacing: -0.04em; text-transform: uppercase;
-      padding: 20px 32px; border: 2px solid var(--ink); border-radius: 8px;
-    }
-
-    /* ── thumb: Compass Design System ── */
-    .thumb-compass { background: #0E0E0C; position: relative; overflow: hidden; }
-    .thumb-compass::before {
-      content: ''; position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(204,255,13,.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(204,255,13,.055) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-    .thumb-compass__grid {
-      position: relative; z-index: 1;
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 66%;
-    }
-    .thumb-compass__cell {
-      aspect-ratio: 1; border-radius: 8px;
-      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.09);
-    }
-    .thumb-compass__cell--accent { background: var(--accent); border-color: var(--accent); }
-    .thumb-compass__cell--lit   { background: rgba(255,255,255,.14); }
-
-    /* ── work card meta ── */
-    .work-card__meta {
-      padding: clamp(14px, 1.8vw, 22px) clamp(16px, 2vw, 24px);
-      background: #fff;
-      display: flex; justify-content: space-between; align-items: center; gap: 12px;
-    }
-    .work-card__info { display: flex; flex-direction: column; gap: 4px; }
     .work-card__name {
-      font-family: var(--title); font-weight: 700;
-      font-size: clamp(14px, 1.3vw, 18px); letter-spacing: -0.02em;
+      font-family: var(--display); font-weight: 900;
+      font-size: clamp(15px, 1.4vw, 20px);
+      letter-spacing: -0.02em; text-transform: uppercase; color: #fff;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-    .work-card__sub {
-      font-family: var(--mono); font-size: 10px; letter-spacing: .07em;
-      text-transform: uppercase; color: var(--ink-60);
-    }
-    .work-card__tag {
-      font-family: var(--mono); font-size: 10px; text-transform: uppercase;
-      letter-spacing: .06em; color: var(--ink);
-      background: #EBEBEB; padding: 5px 12px; border-radius: 999px; flex-shrink: 0;
+    .work-card__right {
+      font-family: var(--mono); font-size: 10px; letter-spacing: .06em;
+      text-transform: uppercase; color: rgba(255,255,255,.5);
+      white-space: nowrap; flex-shrink: 0;
     }
 
     /* ─── ABOUT SECTION ───────────────────────────────────────── */
@@ -499,7 +404,7 @@
       object-fit: cover; display: block;
       transition: transform 0.4s ease;
     }
-    .work-card:hover .work-card__thumb img { transform: scale(1.1); }
+    .work-card:hover .work-card__thumb img { transform: scale(1.05); }
 
     #view-cursor {
       position: fixed; left: 0; top: 0;
@@ -518,7 +423,7 @@
 
     /* ─── SERVICES SECTION ───────────────────────────────────────── */
     .services-section {
-      background: var(--ink);
+      background: var(--bg);
       padding: clamp(64px, 8vw, 112px) var(--pad-x);
     }
     .services-intro {
@@ -533,10 +438,17 @@
       font-size: clamp(16px, 1.7vw, 23px);
       color: rgba(255,255,255,.88); line-height: 1.5; letter-spacing: -.01em;
     }
+    .services-wrapper {
+      background: #111;
+      border-radius: 24px;
+      padding: clamp(40px, 5vw, 64px);
+    }
     .services-container {
-      background: rgba(255,255,255,.04);
-      border-radius: clamp(16px, 2vw, 24px);
+      background: #1e1e1e;
+      border-radius: 16px;
       overflow: hidden;
+      padding: 0;
+      margin-top: clamp(32px, 4vw, 48px);
     }
     .service-row {
       display: grid;
