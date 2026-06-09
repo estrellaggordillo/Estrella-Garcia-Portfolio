@@ -216,7 +216,7 @@
     }
 
     /* ─── SHARED SECTION ──────────────────────────────────────── */
-    .section { padding: clamp(64px, 8vw, 120px) var(--pad-x); }
+    .section { padding: clamp(64px, 8vw, 120px) clamp(20px, 2.5vw, 40px); }
     .section-eyebrow {
       font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
       text-transform: uppercase; color: var(--ink-60); margin-bottom: 14px;
@@ -382,7 +382,7 @@
     /* ─── SERVICES SECTION ───────────────────────────────────────── */
     .services-section {
       background: var(--bg);
-      padding: clamp(64px, 8vw, 112px) var(--pad-x);
+      padding: clamp(64px, 8vw, 112px) clamp(20px, 2.5vw, 40px);
     }
     .services-intro {
       display: flex; align-items: flex-start; gap: 16px;
