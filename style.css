@@ -382,37 +382,38 @@
     /* ─── SERVICES SECTION ───────────────────────────────────────── */
     .services-section {
       background: var(--bg);
-      padding: clamp(64px, 8vw, 112px) clamp(20px, 2.5vw, 40px);
+      padding: clamp(64px, 8vw, 112px) clamp(8px, 1.5vw, 20px);
     }
     .services-intro {
       display: flex; align-items: flex-start; gap: 16px;
-      max-width: 660px; margin-bottom: clamp(32px, 5vw, 52px);
+      max-width: 60%; margin-bottom: clamp(32px, 5vw, 52px);
+      padding: clamp(24px, 3vw, 40px) 0;
     }
     .services-intro__star {
       color: var(--accent); font-size: 22px; line-height: 1.5; flex-shrink: 0;
     }
     .services-intro__quote {
       font-family: var(--title); font-weight: 500;
-      font-size: clamp(16px, 1.7vw, 23px);
+      font-size: 36px;
       color: rgba(255,255,255,.88); line-height: 1.5; letter-spacing: -.01em;
     }
     .services-wrapper {
       background: #111;
       border-radius: 24px;
-      padding: clamp(40px, 5vw, 64px);
+      padding: clamp(24px, 3vw, 40px);
     }
     .services-container {
       background: #1e1e1e;
       border-radius: 16px;
       overflow: hidden;
       padding: 0;
-      margin-top: clamp(32px, 4vw, 48px);
+      margin-top: clamp(16px, 2vw, 24px);
     }
     .service-row {
       display: grid;
       grid-template-columns: 48px 1fr 1.5fr 280px;
       gap: clamp(16px, 2.5vw, 32px);
-      align-items: center;
+      align-items: start;
       padding: clamp(28px, 4vw, 44px) clamp(24px, 3.5vw, 48px);
     }
     @media (max-width: 860px) {
@@ -429,8 +430,8 @@
       color: rgba(255,255,255,.28); align-self: flex-start; padding-top: 8px;
     }
     .service-row__title {
-      font-family: var(--display); font-weight: 900;
-      font-size: clamp(22px, 2.8vw, 44px);
+      font-family: var(--title); font-weight: 700;
+      font-size: 35px;
       color: #fff; letter-spacing: -.025em; line-height: .95; text-transform: uppercase;
     }
     .service-row__body { display: flex; flex-direction: column; gap: 14px; }
@@ -444,7 +445,7 @@
       text-transform: uppercase; color: rgba(255,255,255,.45);
       border: 1px solid rgba(255,255,255,.14); padding: 5px 12px; border-radius: 999px;
     }
-    .service-row__img { width: 100%; height: 200px; border-radius: 10px; overflow: hidden; }
+    .service-row__img { width: 100%; height: 280px; border-radius: 10px; overflow: hidden; }
     .service-row__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .srv-reveal {
       opacity: 0; transform: translateY(40px);
