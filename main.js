@@ -217,4 +217,22 @@
     });
   }
 
+  // ── ABOUT SECTION ─────────────────────────────────────────
+  var aboutText = document.querySelector('.about-text');
+  var aboutPhoto = document.querySelector('.about-photo-wrap');
+  if (aboutText) {
+    new IntersectionObserver(function(entries, obs) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 }).observe(aboutText);
+  }
+  if (aboutPhoto) {
+    new IntersectionObserver(function(entries, obs) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 }).observe(aboutPhoto);
+  }
+
 })();

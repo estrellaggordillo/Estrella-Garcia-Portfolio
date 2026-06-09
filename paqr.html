@@ -293,32 +293,36 @@
     }
     @media (max-width: 640px) { .other-grid { grid-template-columns: 1fr; } }
     .other-card {
-      display: block; overflow: hidden; border-radius: clamp(12px, 1.5vw, 20px);
+      display: block; overflow: hidden; border-radius: 20px;
+      background: #171717;
       transition: transform .35s cubic-bezier(.2,.8,.2,1); cursor: pointer;
     }
     .other-card:hover { transform: scale(1.012); }
-    .other-card__thumb { aspect-ratio: 16/9; overflow: hidden; }
+    .other-card__thumb {
+      margin: 10px 10px 0 10px;
+      border-radius: 14px; overflow: hidden;
+      aspect-ratio: 16/9;
+    }
     .other-card__thumb img {
       width: 100%; height: 100%; object-fit: cover; display: block;
-      transition: transform .4s ease; border-radius: 0;
+      transition: transform 0.4s ease; border-radius: 0;
     }
-    .other-card:hover .other-card__thumb img { transform: scale(1.06); }
-    .other-card__meta {
-      background: #fff; padding: 18px 20px;
-      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    .other-card:hover .other-card__thumb img { transform: scale(1.05); }
+    .other-card__bar {
+      background: #171717;
+      padding: 16px 20px;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
     }
     .other-card__name {
-      font-family: var(--title); font-weight: 700;
-      font-size: clamp(14px, 1.2vw, 17px); letter-spacing: -0.02em;
+      font-family: var(--display); font-weight: 900;
+      font-size: clamp(15px, 1.4vw, 20px);
+      letter-spacing: -0.02em; text-transform: uppercase; color: #fff;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-    .other-card__sub {
-      font-family: var(--mono); font-size: 10px; letter-spacing: .07em;
-      text-transform: uppercase; color: var(--ink-60); margin-top: 4px;
-    }
-    .other-card__tag {
+    .other-card__right {
       font-family: var(--mono); font-size: 10px; letter-spacing: .06em;
-      text-transform: uppercase; color: var(--ink-60);
-      border: 1px solid var(--ink-20); padding: 5px 12px; border-radius: 999px; flex-shrink: 0;
+      text-transform: uppercase; color: rgba(255,255,255,.5);
+      white-space: nowrap; flex-shrink: 0;
     }
 
     /* ─── FOOTER ──────────────────────────────────────────────── */
@@ -554,24 +558,18 @@
       <div class="other-card__thumb">
         <img src="NUSUK_Image 1.png" alt="Nusuk">
       </div>
-      <div class="other-card__meta">
-        <div>
-          <div class="other-card__name">Nusuk</div>
-          <div class="other-card__sub">Public Sector · 2025</div>
-        </div>
-        <span class="other-card__tag">Research &amp; UX</span>
+      <div class="other-card__bar">
+        <span class="other-card__name">Nusuk</span>
+        <span class="other-card__right">Public Sector · 2025</span>
       </div>
     </a>
     <a class="other-card reveal reveal-d1" href="bangkokbank.html" tabindex="0">
       <div class="other-card__thumb">
         <img src="bangkok_Image 1.png" alt="Bangkok Bank">
       </div>
-      <div class="other-card__meta">
-        <div>
-          <div class="other-card__name">Bangkok Bank</div>
-          <div class="other-card__sub">Banking · 2023</div>
-        </div>
-        <span class="other-card__tag">UX Strategy</span>
+      <div class="other-card__bar">
+        <span class="other-card__name">Bangkok Bank</span>
+        <span class="other-card__right">Banking · 2023</span>
       </div>
     </a>
   </div>
