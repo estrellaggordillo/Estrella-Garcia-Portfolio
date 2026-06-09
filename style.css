@@ -436,8 +436,8 @@
     }
     .service-row__body { display: flex; flex-direction: column; gap: 14px; }
     .service-row__desc {
-      font-family: var(--title); font-size: clamp(13px, .9vw, 14px);
-      color: rgba(255,255,255,.5); line-height: 1.65;
+      font-family: var(--title); font-size: clamp(18px, .9vw, 19px);
+      color: #fff; line-height: 1.65;
     }
     .service-row__tags { display: flex; flex-wrap: wrap; gap: 7px; }
     .service-tag {
