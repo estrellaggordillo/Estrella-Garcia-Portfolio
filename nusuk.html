@@ -82,6 +82,10 @@
     .bottom-nav__avatar {
       width: clamp(48px, 5vw, 64px); height: clamp(48px, 5vw, 64px);
       border-radius: 50%; overflow: hidden; background: #333; flex-shrink: 0;
+      cursor: pointer; transition: transform .2s ease, filter .2s ease;
+    }
+    .bottom-nav__avatar:hover {
+      transform: scale(1.06); filter: brightness(1.1);
     }
     .bottom-nav__avatar img {
       width: 100%; height: 100%; object-fit: cover;
@@ -551,9 +555,9 @@
 <!-- ── STICKY BOTTOM NAV ───────────────────────────────────────── -->
 <div class="bottom-nav-wrap">
   <div class="bottom-nav">
-    <div class="bottom-nav__avatar">
+    <a class="bottom-nav__avatar" href="index.html#top" aria-label="Back to home">
       <img src="profile_pic.png" alt="Estrella García">
-    </div>
+    </a>
     <div class="bottom-nav__info">
       <span class="bottom-nav__name">Estrella García</span>
       <div class="bottom-nav__marquee-wrap">

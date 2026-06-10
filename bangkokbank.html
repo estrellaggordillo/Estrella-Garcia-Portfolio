@@ -82,6 +82,10 @@
     .bottom-nav__avatar {
       width: clamp(48px, 5vw, 64px); height: clamp(48px, 5vw, 64px);
       border-radius: 50%; overflow: hidden; background: #333; flex-shrink: 0;
+      cursor: pointer; transition: transform .2s ease, filter .2s ease;
+    }
+    .bottom-nav__avatar:hover {
+      transform: scale(1.06); filter: brightness(1.1);
     }
     .bottom-nav__avatar img {
       width: 100%; height: 100%; object-fit: cover;
@@ -431,19 +435,8 @@
 <section class="cs">
   <h2 class="cs__heading reveal">THE STRATEGY</h2>
   <p class="cs__body reveal reveal-d1">To guide the transformation, we devised a UX strategy plan that helped interconnect the dots across teams and align efforts toward a shared vision. This strategy focused on defining a clear future state for the user experience — where we wanted UX to go and why it mattered to both the business and end users. We established measurable goals to track progress and ensure alignment with the overall product direction. Finally, we mapped out a concrete plan to get there, outlining key initiatives, priorities, and process improvements. This approach not only clarified the long-term UX vision but also gave teams the structure and tools they needed to move forward with consistency and purpose.</p>
-  <div class="cs__images">
-    <div class="img-pair reveal">
-      <img src="bangkok_Image 5.png" alt="Bangkok Bank — UX strategy overview">
-      <div class="img-empty"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ── STRATEGY IMAGE 6 (no divider, empty column left) ───────── -->
-<section class="cs cs--no-border">
-  <div class="img-pair reveal">
-    <div class="img-empty"></div>
-    <img src="bangkok_Image 6.png" alt="Bangkok Bank — strategy details">
+  <div class="cs__images reveal">
+    <img class="img-full" src="bangkok_Image 6.png" alt="Bangkok Bank — strategy details">
   </div>
 </section>
 
@@ -490,9 +483,9 @@
 <!-- ── STICKY BOTTOM NAV ───────────────────────────────────────── -->
 <div class="bottom-nav-wrap">
   <div class="bottom-nav">
-    <div class="bottom-nav__avatar">
+    <a class="bottom-nav__avatar" href="index.html#top" aria-label="Back to home">
       <img src="profile_pic.png" alt="Estrella García">
-    </div>
+    </a>
     <div class="bottom-nav__info">
       <span class="bottom-nav__name">Estrella García</span>
       <div class="bottom-nav__marquee-wrap">
