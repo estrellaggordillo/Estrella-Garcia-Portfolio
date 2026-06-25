@@ -156,42 +156,51 @@
       padding-bottom: 0;
     }
     .hero__inner {
-      padding: 0 var(--pad-x) clamp(48px, 6vw, 80px);
-      display: flex; flex-direction: column; gap: 24px;
+      padding: 0 var(--pad-x);
+      display: flex; flex-direction: column; align-items: center;
     }
-    .hero__back {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--ink-60);
-      transition: color .2s; width: fit-content;
+    .hero__sponsor {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 10px;
+      margin-top: clamp(120px, 18vh, 240px);
     }
-    .hero__back:hover { color: var(--ink); }
-    .hero__back svg { width: 14px; height: 14px; flex-shrink: 0; }
-    .hero__pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hero__sponsor-logo { height: clamp(28px, 2.2vw, 32px); width: auto; display: block; }
+    .hero__sponsor-text {
+      font-family: var(--title); font-size: clamp(16px, 1.4vw, 21px);
+      color: var(--ink-60); letter-spacing: -0.01em;
+    }
+    .hero__subtitle {
+      font-family: var(--title); font-size: 18px; font-weight: 700;
+      color: var(--ink); line-height: 1.6; letter-spacing: -0.01em;
+      text-align: center; max-width: 480px;
+      margin: clamp(16px, 2vw, 24px) auto 0;
+    }
+    .hero__pills {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+      margin-top: clamp(16px, 2vw, 24px);
+    }
     .hero__pill {
       font-family: var(--mono); font-size: 10px; letter-spacing: .06em;
       text-transform: uppercase; padding: 6px 14px; border-radius: 999px;
     }
-    .hero__pill--accent { background: var(--accent); color: var(--ink); font-weight: 600; }
+    .hero__pill--accent { border: 1px solid var(--ink-20); color: var(--ink-60); }
     .hero__pill--outline { border: 1px solid var(--ink-20); color: var(--ink-60); }
-    .hero__title {
-      font-family: var(--display); font-weight: 900;
-      font-size: clamp(88px, 16vw, 220px);
-      line-height: .86; letter-spacing: -0.03em;
-      text-transform: uppercase; color: var(--ink);
+    .hero__proto-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--title); font-weight: 600; font-size: 13px;
+      color: var(--ink); letter-spacing: -0.01em;
+      margin-top: clamp(16px, 2vw, 24px);
+      margin-bottom: clamp(100px, 12vw, 160px);
+      transition: opacity .2s;
     }
-    .hero__subtitle {
-      font-family: var(--title); font-size: clamp(16px, 1.5vw, 22px);
-      color: var(--ink-60); line-height: 1.6;
-      max-width: 560px; letter-spacing: -0.01em;
-    }
-    .hero__image { padding: 0 var(--pad-x); }
+    .hero__proto-link:hover { opacity: .6; }
+    .hero__proto-link svg { width: 11px; height: 11px; flex-shrink: 0; }
+    .hero__image { padding: 0; }
     .hero__image img { width: 100%; height: auto; display: block; }
 
     /* ─── INFO STRIP ──────────────────────────────────────────── */
     .info-strip {
       padding: clamp(48px, 5vw, 72px) var(--pad-x);
-      border-top: 1px solid var(--ink-20);
     }
     .info-grid {
       display: grid; grid-template-columns: repeat(4, 1fr);
@@ -214,41 +223,62 @@
     /* ─── CONTENT SECTIONS ────────────────────────────────────── */
     .cs {
       padding: clamp(80px, 8vw, 120px) var(--pad-x);
-      border-top: 1px solid var(--ink-20);
+    }
+    .cs__layout {
+      display: grid;
+      grid-template-columns: minmax(120px, 18%) minmax(0, 780px);
+      gap: clamp(16px, 2vw, 32px);
+      align-items: start;
     }
     .cs__heading {
-      font-family: var(--display); font-weight: 900;
-      font-size: clamp(36px, 5vw, 72px);
-      line-height: .9; letter-spacing: -0.025em; text-transform: uppercase;
-      color: var(--ink); margin-bottom: clamp(24px, 3vw, 40px);
+      font-family: var(--title); font-weight: 500;
+      font-size: clamp(13px, 1vw, 14px);
+      line-height: 1.5; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--ink);
     }
+    .cs__content { display: flex; flex-direction: column; align-items: center; }
+    .cs__text { padding: 0 clamp(16px, 4vw, 56px); max-width: 720px; }
     .cs__body {
       font-family: var(--title); font-size: clamp(15px, 1.2vw, 18px);
       line-height: 1.75; color: var(--ink-60);
-      max-width: 720px; letter-spacing: -0.01em;
+      letter-spacing: -0.01em;
     }
     .cs__body strong { font-weight: 600; color: var(--ink); }
     .cs__body + .cs__body { margin-top: 24px; }
-    .cs__images { margin-top: clamp(48px, 6vw, 80px); }
+    .cs__images {
+      width: 100vw; position: relative; left: 50%; margin-left: -50vw;
+      margin-top: clamp(160px, 16vw, 240px);
+    }
+    @media (max-width: 800px) {
+      .cs__layout { grid-template-columns: 1fr; gap: 0; }
+      .cs__heading { margin-bottom: clamp(16px, 4vw, 24px); }
+      .cs__text { padding: 0; max-width: none; }
+    }
 
     .img-full { width: 100%; height: auto; display: block; }
 
     .img-pair {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(16px, 2vw, 32px);
+      gap: clamp(16px, 2vw, 24px);
+      aspect-ratio: 21 / 9;
     }
-    @media (max-width: 640px) { .img-pair { grid-template-columns: 1fr; } }
-    .img-pair img { width: 100%; height: auto; display: block; }
+    .img-pair img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .img-pair > *:first-child { border-radius: 0 16px 16px 0; }
+    .img-pair > *:last-child { border-radius: 16px 0 0 16px; }
+    @media (max-width: 640px) {
+      .img-pair { grid-template-columns: 1fr; aspect-ratio: auto; }
+      .img-pair img { height: auto; }
+      .img-pair > *:first-child { border-radius: 0 0 16px 16px; }
+      .img-pair > *:last-child { border-radius: 16px 16px 0 0; }
+    }
 
     /* ─── PROCESS PHASES ──────────────────────────────────────── */
-    .phases { margin-top: clamp(32px, 4vw, 48px); }
+    .phases { margin-top: 0; }
     .phase {
-      padding: clamp(24px, 3vw, 36px) 0;
-      border-top: 1px solid var(--ink-20);
+      padding: clamp(16px, 2vw, 20px) 0;
       display: grid; grid-template-columns: 48px 1fr;
       gap: 24px; align-items: start;
     }
-    .phase:last-child { border-bottom: 1px solid var(--ink-20); }
     .phase__num {
       font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
       color: var(--ink-60); padding-top: 4px;
@@ -264,7 +294,7 @@
     }
 
     /* ─── OTHER PROJECTS ──────────────────────────────────────── */
-    .other { padding: clamp(80px, 8vw, 120px) var(--pad-x); border-top: 1px solid var(--ink-20); }
+    .other { padding: clamp(80px, 8vw, 120px) var(--pad-x); }
     .other__label {
       font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
       text-transform: uppercase; color: var(--ink-60); margin-bottom: 32px;
@@ -310,7 +340,6 @@
     /* ─── FOOTER ──────────────────────────────────────────────── */
     .footer {
       padding: clamp(80px, 8vw, 120px) var(--pad-x) clamp(120px, 14vw, 200px);
-      border-top: 1px solid var(--ink-20);
       display: flex; flex-direction: column; gap: clamp(24px, 3vw, 40px);
     }
     .footer__connect {
@@ -352,22 +381,19 @@
   </div>
 
   <div class="hero__inner">
-    <a class="hero__back" href="index.html#projects">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-        <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
-      </svg>
-      Back to work
-    </a>
+    <div class="hero__sponsor reveal">
+      <img class="hero__sponsor-logo" src="buddys_logo.png" alt="Buddy's App">
+      <span class="hero__sponsor-text">– in collaboration with Designit</span>
+    </div>
+    <p class="hero__subtitle">A revamp of an internal app for a taxi drivers company with a focus on being an innovative human-centric app.</p>
     <div class="hero__pills">
       <span class="hero__pill hero__pill--accent">Product Design</span>
       <span class="hero__pill hero__pill--outline">Transportation</span>
       <span class="hero__pill hero__pill--outline">2024</span>
     </div>
-    <h1 class="hero__title">BUDDY'S<br>APP</h1>
-    <p class="hero__subtitle">A revamp of an internal app for a taxi drivers company with a focus on being an innovative human-centric app.</p>
-    <a href="https://www.figma.com/proto/pRpzXwhXFrqzRu0P6IhmWu/04---Buddy-s-App---Visual-Design?node-id=31-97179&p=f&t=rxn7oSxfegga6tqC-1&scaling=scale-down&content-scaling=fixed&page-id=15%3A25124&starting-point-node-id=31%3A97179&show-proto-sidebar=1" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:8px;background:var(--ink);color:#fff;font-family:var(--title);font-weight:600;font-size:14px;letter-spacing:-0.01em;padding:13px 24px;border-radius:999px;white-space:nowrap;transition:background .2s,transform .2s;width:fit-content;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='var(--ink)'">
+    <a class="hero__proto-link" href="https://www.figma.com/proto/pRpzXwhXFrqzRu0P6IhmWu/04---Buddy-s-App---Visual-Design?node-id=31-97179&p=f&t=rxn7oSxfegga6tqC-1&scaling=scale-down&content-scaling=fixed&page-id=15%3A25124&starting-point-node-id=31%3A97179&show-proto-sidebar=1" target="_blank" rel="noopener">
       View prototype
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
     </a>
   </div>
 
@@ -400,8 +426,14 @@
 
 <!-- ── THE CLIENT ──────────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">THE CLIENT</h2>
-  <p class="cs__body reveal reveal-d1">A revamp of an internal app for a taxi drivers company with a focus on being an innovative human-centric app. A revamp of an internal app for a taxi drivers company with a focus on being an innovative human-centric app.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">THE CLIENT</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">Our client is a transportation company managing a large fleet of taxi drivers, where day-to-day administrative tasks — checking salary details, managing leave, reporting issues — traditionally relied on in-person visits to HR and admin offices. As the company grew, it became clear that drivers needed <strong>a more direct, independent way to handle their daily needs</strong>, without losing the supportive, human tone that defines the company's internal culture. Buddy's App was conceived as that bridge: <strong>a digital companion built specifically for drivers</strong>.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images">
     <div class="img-pair reveal">
       <img src="buddy_Image 2.png" alt="Buddy's App — client context">
@@ -412,9 +444,15 @@
 
 <!-- ── THE CHALLENGE ───────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">THE CHALLENGE</h2>
-  <p class="cs__body reveal reveal-d1">The drivers often rely on in-person visits to HR or admin offices to resolve everyday issues — whether it's checking salary details, managing leave, or reporting a problem. This constant need for physical presence leads to inefficiencies, longer resolution times, and frustration for both employees and support teams.</p>
-  <p class="cs__body reveal reveal-d2">The challenge was to build a tool that empowered employees to handle their day-to-day needs independently, without adding complexity or relying on external help. The goal: reduce unnecessary office visits, improve operational efficiency, and create a smoother, more human internal experience.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">THE CHALLENGE</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">The drivers often rely on in-person visits to HR or admin offices to resolve everyday issues — whether it's checking salary details, managing leave, or reporting a problem. This <strong>constant need for physical presence leads to inefficiencies, longer resolution times</strong>, and frustration for both employees and support teams.</p>
+        <p class="cs__body reveal reveal-d2">The challenge was to build a tool that empowered employees to handle their day-to-day needs independently, without adding complexity or relying on external help. The goal: <strong>reduce unnecessary office visits, improve operational efficiency, and create a smoother, more human internal experience</strong>.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images reveal">
     <img class="img-full" src="buddy_Image 4.png" alt="Buddy's App — challenge and problem space">
   </div>
@@ -422,48 +460,62 @@
 
 <!-- ── BRAND IDENTITY ──────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">BRAND IDENTITY</h2>
-  <p class="cs__body reveal reveal-d1">Buddy's App was designed as a digital companion for employees — friendly, reliable, and easy to use. Its identity is grounded in clarity, empathy, and empowerment, reflecting a tool that supports people in managing their work-related needs with confidence and autonomy.</p>
-  <p class="cs__body reveal reveal-d2">Visually, the brand embraces a clean, modern aesthetic with soft tones and approachable typography to convey trust and simplicity. The name Buddy reinforces the app's core idea: it's not just a platform, it's a helpful ally — one that makes administrative tasks feel less bureaucratic and more human.</p>
-  <p class="cs__body reveal reveal-d3">From language to interface design, every touchpoint is intentionally crafted to feel intuitive, supportive, and frustration-free. The goal was to create a product that employees don't just use, but actually value as part of their daily routine.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">BRAND IDENTITY</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">Buddy's App was designed as a digital companion for employees — friendly, reliable, and easy to use. Its identity is grounded in <strong>clarity, empathy, and empowerment</strong>, reflecting a tool that supports people in managing their work-related needs with confidence and autonomy.</p>
+        <p class="cs__body reveal reveal-d2">Visually, the brand embraces a clean, modern aesthetic with soft tones and approachable typography to convey trust and simplicity. The name Buddy reinforces the app's core idea: <strong>it's not just a platform, it's a helpful ally</strong> — one that makes administrative tasks feel less bureaucratic and more human.</p>
+        <p class="cs__body reveal reveal-d3">From language to interface design, every touchpoint is intentionally crafted to feel <strong>intuitive, supportive, and frustration-free</strong>. The goal was to create a product that employees don't just use, but actually value as part of their daily routine.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images">
     <div class="img-pair reveal">
       <img src="buddy_Image 5.png" alt="Buddy's App — brand identity">
       <img src="buddy_Image 6.png" alt="Buddy's App — visual identity">
     </div>
+    <img class="img-full reveal" src="buddy_Image 7.png" alt="Buddy's App — final screens and delivery" style="margin-top: clamp(48px, 6vw, 80px);">
   </div>
 </section>
 
 <!-- ── THE PROCESS ─────────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">THE PROCESS</h2>
-
-  <div class="phases">
-    <div class="phase reveal">
-      <div class="phase__num">01</div>
-      <div>
-        <div class="phase__name">Research and Understanding</div>
-        <p class="phase__desc">We stated the first phase of this project, where we conducted comprehensive desk research and competitor analysis. Additionally, we engaged in interviews with taxi drivers and stakeholders, gaining valuable insights into their pain points, challenges, and aspirations. As a result, we built a document with the insights gathered from the different interviews, which spans 40 pages.</p>
-      </div>
-    </div>
-    <div class="phase reveal reveal-d1">
-      <div class="phase__num">02</div>
-      <div>
-        <div class="phase__name">Design Processes</div>
-        <p class="phase__desc">With the results of the first phase, we then started to transform these insights into opportunities and, consequentially, into functionalities. To do that, we map out the current architecture, created drivers archetypes, clustered improvement areas, and drafted the first 67 journeys. Later on, in a co-design workshop, we brainstormed, prioritized, and defined the future features of the app.</p>
-      </div>
-    </div>
-    <div class="phase reveal reveal-d2">
-      <div class="phase__num">03</div>
-      <div>
-        <div class="phase__name">Delivery</div>
-        <p class="phase__desc">We work hand in hand with the IT department and Product Owners (POs) to bring our designs to life. We adopted a rapid prototyping approach, focusing on the key features, and iterations based on quick feedback. Our primary focus was translating all the drafted and prioritised features into actionable wireframes and user stories. To do so, we held two rounds of drivers' interviews, various extensive stakeholders validations sessions and multiple meetings with the developers.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">THE PROCESS</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <div class="phases">
+          <div class="phase reveal">
+            <div class="phase__num">01</div>
+            <div>
+              <div class="phase__name">Research and Understanding</div>
+              <p class="phase__desc">We stated the first phase of this project, where we conducted comprehensive desk research and competitor analysis. Additionally, we engaged in interviews with taxi drivers and stakeholders, gaining valuable insights into their pain points, challenges, and aspirations. As a result, we built a document with the insights gathered from the different interviews, which spans 40 pages.</p>
+            </div>
+          </div>
+          <div class="phase reveal reveal-d1">
+            <div class="phase__num">02</div>
+            <div>
+              <div class="phase__name">Design Processes</div>
+              <p class="phase__desc">With the results of the first phase, we then started to transform these insights into opportunities and, consequentially, into functionalities. To do that, we map out the current architecture, created drivers archetypes, clustered improvement areas, and drafted the first 67 journeys. Later on, in a co-design workshop, we brainstormed, prioritized, and defined the future features of the app.</p>
+            </div>
+          </div>
+          <div class="phase reveal reveal-d2">
+            <div class="phase__num">03</div>
+            <div>
+              <div class="phase__name">Delivery</div>
+              <p class="phase__desc">We work hand in hand with the IT department and Product Owners (POs) to bring our designs to life. We adopted a rapid prototyping approach, focusing on the key features, and iterations based on quick feedback. Our primary focus was translating all the drafted and prioritised features into actionable wireframes and user stories. To do so, we held two rounds of drivers' interviews, various extensive stakeholders validations sessions and multiple meetings with the developers.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="cs__images reveal">
-    <img class="img-full" src="buddy_Image 7.png" alt="Buddy's App — final screens and delivery">
+  <div class="cs__images">
+    <img class="img-full reveal" src="buddy's_screen1.png" alt="Buddy's App — final screens and delivery">
+    <img class="img-full reveal" src="buddy's_screen2.png" alt="Buddy's App — final screens and delivery" style="margin-top: clamp(48px, 6vw, 80px);">
+    <img class="img-full reveal" src="buddy's_screen3.png" alt="Buddy's App — final screens and delivery" style="margin-top: clamp(48px, 6vw, 80px);">
   </div>
 </section>
 

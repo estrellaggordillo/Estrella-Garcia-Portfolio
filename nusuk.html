@@ -156,44 +156,51 @@
       padding-bottom: 0;
     }
     .hero__inner {
-      padding: 0 var(--pad-x) clamp(48px, 6vw, 80px);
-      display: flex; flex-direction: column; gap: 24px;
+      padding: 0 var(--pad-x);
+      display: flex; flex-direction: column; align-items: center;
     }
-    .hero__back {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--ink-60);
-      transition: color .2s; width: fit-content;
+    .hero__sponsor {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 10px;
+      margin-top: clamp(120px, 18vh, 240px);
     }
-    .hero__back:hover { color: var(--ink); }
-    .hero__back svg { width: 14px; height: 14px; flex-shrink: 0; }
-    .hero__pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hero__sponsor-logo { height: clamp(18px, 1.6vw, 24px); width: auto; display: block; }
+    .hero__sponsor-text {
+      font-family: var(--title); font-size: clamp(16px, 1.4vw, 21px);
+      color: var(--ink-60); letter-spacing: -0.01em;
+    }
+    .hero__subtitle {
+      font-family: var(--title); font-size: 18px; font-weight: 700;
+      color: var(--ink); line-height: 1.6; letter-spacing: -0.01em;
+      text-align: center; max-width: 480px;
+      margin: clamp(16px, 2vw, 24px) auto 0;
+    }
+    .hero__pills {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+      margin-top: clamp(16px, 2vw, 24px);
+    }
     .hero__pill {
       font-family: var(--mono); font-size: 10px; letter-spacing: .06em;
       text-transform: uppercase; padding: 6px 14px; border-radius: 999px;
     }
-    .hero__pill--accent { background: var(--accent); color: var(--ink); font-weight: 600; }
+    .hero__pill--accent { border: 1px solid var(--ink-20); color: var(--ink-60); }
     .hero__pill--outline { border: 1px solid var(--ink-20); color: var(--ink-60); }
-    .hero__title {
-      font-family: var(--display); font-weight: 900;
-      font-size: clamp(88px, 16vw, 220px);
-      line-height: .86; letter-spacing: -0.03em;
-      text-transform: uppercase; color: var(--ink);
+    .hero__proto-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--title); font-weight: 600; font-size: 13px;
+      color: var(--ink); letter-spacing: -0.01em;
+      margin-top: clamp(16px, 2vw, 24px);
+      margin-bottom: clamp(100px, 12vw, 160px);
+      transition: opacity .2s;
     }
-    .hero__subtitle {
-      font-family: var(--title); font-size: clamp(16px, 1.5vw, 22px);
-      color: var(--ink-60); line-height: 1.6;
-      max-width: 560px; letter-spacing: -0.01em;
-    }
-    .hero__image {
-      padding: 0 var(--pad-x);
-    }
+    .hero__proto-link:hover { opacity: .6; }
+    .hero__proto-link svg { width: 11px; height: 11px; flex-shrink: 0; }
+    .hero__image { padding: 0; }
     .hero__image img { width: 100%; height: auto; display: block; }
 
     /* ─── INFO STRIP ──────────────────────────────────────────── */
     .info-strip {
       padding: clamp(48px, 5vw, 72px) var(--pad-x);
-      border-top: 1px solid var(--ink-20);
     }
     .info-grid {
       display: grid; grid-template-columns: repeat(4, 1fr);
@@ -216,36 +223,64 @@
     /* ─── CONTENT SECTIONS ────────────────────────────────────── */
     .cs {
       padding: clamp(80px, 8vw, 120px) var(--pad-x);
-      border-top: 1px solid var(--ink-20);
+    }
+    .cs__layout {
+      display: grid;
+      grid-template-columns: minmax(120px, 18%) minmax(0, 780px);
+      gap: clamp(16px, 2vw, 32px);
+      align-items: start;
     }
     .cs__eyebrow {
       font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
       text-transform: uppercase; color: var(--ink-60); margin-bottom: 16px;
     }
     .cs__heading {
-      font-family: var(--display); font-weight: 900;
-      font-size: clamp(36px, 5vw, 72px);
-      line-height: .9; letter-spacing: -0.025em; text-transform: uppercase;
-      color: var(--ink); margin-bottom: clamp(24px, 3vw, 40px);
+      font-family: var(--title); font-weight: 500;
+      font-size: clamp(13px, 1vw, 14px);
+      line-height: 1.5; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--ink);
     }
+    .cs__content { display: flex; flex-direction: column; align-items: center; }
+    .cs__text { padding: 0 clamp(16px, 4vw, 56px); max-width: 720px; }
     .cs__body {
       font-family: var(--title); font-size: clamp(15px, 1.2vw, 18px);
       line-height: 1.75; color: var(--ink-60);
-      max-width: 720px; letter-spacing: -0.01em;
+      letter-spacing: -0.01em;
     }
     .cs__body strong { font-weight: 600; color: var(--ink); }
-    .cs__images { margin-top: clamp(48px, 6vw, 80px); }
+    .cs__images {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: -50vw;
+      margin-top: clamp(160px, 16vw, 240px);
+    }
+    @media (max-width: 800px) {
+      .cs__layout { grid-template-columns: 1fr; gap: 0; }
+      .cs__heading { margin-bottom: clamp(16px, 4vw, 24px); }
+      .cs__text { padding: 0; max-width: none; }
+    }
 
     /* full-width image */
     .img-full { width: 100%; height: auto; display: block; }
 
-    /* image pair (2 cols) */
+    /* image pair (2 cols, edge-to-edge with inner-corner rounding) */
     .img-pair {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(16px, 2vw, 32px);
+      gap: clamp(16px, 2vw, 24px);
+      aspect-ratio: 21 / 9;
     }
-    @media (max-width: 640px) { .img-pair { grid-template-columns: 1fr; } }
-    .img-pair img { width: 100%; height: auto; display: block; }
+    .img-pair img,
+    .img-pair video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .img-pair > *:first-child { border-radius: 0 16px 16px 0; }
+    .img-pair > *:last-child { border-radius: 16px 0 0 16px; }
+    @media (max-width: 640px) {
+      .img-pair { grid-template-columns: 1fr; aspect-ratio: auto; }
+      .img-pair img,
+      .img-pair video { height: auto; }
+      .img-pair > *:first-child { border-radius: 0 0 16px 16px; }
+      .img-pair > *:last-child { border-radius: 16px 16px 0 0; }
+    }
 
     /* image caption */
     .img-cap {
@@ -254,14 +289,12 @@
     }
 
     /* ─── PROCESS PHASES ──────────────────────────────────────── */
-    .phases { margin-top: clamp(32px, 4vw, 48px); }
+    .phases { margin-top: 0; }
     .phase {
-      padding: clamp(24px, 3vw, 36px) 0;
-      border-top: 1px solid var(--ink-20);
+      padding: clamp(16px, 2vw, 20px) 0;
       display: grid; grid-template-columns: 48px 1fr;
       gap: 24px; align-items: start;
     }
-    .phase:last-child { border-bottom: 1px solid var(--ink-20); }
     .phase__num {
       font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
       color: var(--ink-60); padding-top: 4px;
@@ -277,7 +310,7 @@
     }
 
     /* ─── OTHER PROJECTS ──────────────────────────────────────── */
-    .other { padding: clamp(80px, 8vw, 120px) var(--pad-x); border-top: 1px solid var(--ink-20); }
+    .other { padding: clamp(80px, 8vw, 120px) var(--pad-x); }
     .other__label {
       font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
       text-transform: uppercase; color: var(--ink-60); margin-bottom: 32px;
@@ -323,7 +356,6 @@
     /* ─── FOOTER ──────────────────────────────────────────────── */
     .footer {
       padding: clamp(80px, 8vw, 120px) var(--pad-x) clamp(120px, 14vw, 200px);
-      border-top: 1px solid var(--ink-20);
       display: flex; flex-direction: column; gap: clamp(24px, 3vw, 40px);
     }
     .footer__connect {
@@ -365,22 +397,22 @@
   </div>
 
   <div class="hero__inner">
-    <a class="hero__back" href="index.html#projects">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-        <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
-      </svg>
-      Back to work
-    </a>
+    <div class="hero__sponsor reveal">
+      <img class="hero__sponsor-logo" src="nusuk_logo.png" alt="Nusuk">
+      <span class="hero__sponsor-text">– for the Government of Abu Dhabi</span>
+    </div>
+
+    <p class="hero__subtitle">Redesigning the digital pilgrim experience for millions of users across 180+ countries — through deep research, journey mapping, and strategic UX.</p>
+
     <div class="hero__pills">
       <span class="hero__pill hero__pill--accent">Research &amp; User Experience</span>
       <span class="hero__pill hero__pill--outline">Public Sector</span>
       <span class="hero__pill hero__pill--outline">2025</span>
     </div>
-    <h1 class="hero__title">NUSUK</h1>
-    <p class="hero__subtitle">Redesigning the digital pilgrim experience for millions of users across 180+ countries — through deep research, journey mapping, and strategic UX.</p>
-    <a href="https://www.figma.com/proto/n5fXtFyQt6CMo6GA21yLaQ/-Share-Dev--Nusuk---Website?node-id=190-4155&p=f&t=orp6Ncynnygw7D4s-1&scaling=min-zoom&content-scaling=fixed&page-id=1%3A80&starting-point-node-id=156%3A1488" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:8px;background:var(--ink);color:#fff;font-family:var(--title);font-weight:600;font-size:14px;letter-spacing:-0.01em;padding:13px 24px;border-radius:999px;white-space:nowrap;transition:background .2s,transform .2s;width:fit-content;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='var(--ink)'">
+
+    <a class="hero__proto-link" href="https://www.figma.com/proto/n5fXtFyQt6CMo6GA21yLaQ/-Share-Dev--Nusuk---Website?node-id=190-4155&p=f&t=orp6Ncynnygw7D4s-1&scaling=min-zoom&content-scaling=fixed&page-id=1%3A80&starting-point-node-id=156%3A1488" target="_blank" rel="noopener">
       View website prototype
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
     </a>
   </div>
 
@@ -413,8 +445,14 @@
 
 <!-- ── THE CHALLENGE ───────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">THE CHALLENGE</h2>
-  <p class="cs__body reveal reveal-d1">Designing for Nusuk meant creating a unified, intuitive experience that could support millions of Muslims around the world in their spiritual journey. The challenge was to deliver a digital product that not only respects deep cultural and religious values but also serves diverse needs — from everyday faith practices to the complexities of planning and performing Hajj or Umrah. This required balancing usability with meaningful experiences, while working within tight timelines and collaborating with multiple stakeholders across different regions.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">THE CHALLENGE</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">Designing for Nusuk meant creating a unified, intuitive experience that could <strong>support millions of Muslims around the world</strong> in their spiritual journey. The challenge was to deliver a digital product that not only respects deep cultural and religious values but also serves diverse needs — from everyday faith practices to the complexities of planning and performing Hajj or Umrah. This required <strong>balancing usability with meaningful experiences</strong>, while working within tight timelines and collaborating with multiple stakeholders across different regions.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images">
     <div class="img-pair reveal">
       <img src="nusuk_Image 2.png" alt="Hajj pilgrims — cultural context">
@@ -425,8 +463,14 @@
 
 <!-- ── THE STRATEGY ────────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">THE STRATEGY</h2>
-  <p class="cs__body reveal reveal-d1">To ensure alignment across teams and a smooth delivery process, we established a clear product strategy and introduced agile methodologies. This included defining design sprints, regular check-ins, and collaborative rituals to keep stakeholders engaged. We worked closely with cross-functional teams to streamline workflows, increase efficiency, and promote a user-centered approach throughout the product development cycle. Our focus was on creating a scalable design system and delivering impactful features, while fostering a culture of continuous improvement and feedback.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">THE STRATEGY</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">To ensure alignment across teams and a smooth delivery process, we established a clear product strategy and introduced <strong>agile methodologies</strong>. This included defining design sprints, regular check-ins, and collaborative rituals to keep stakeholders engaged. We worked closely with cross-functional teams to streamline workflows, increase efficiency, and promote a user-centered approach throughout the product development cycle. Our focus was on creating <strong>a scalable design system</strong> and delivering impactful features, while fostering a culture of continuous improvement and feedback.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images reveal">
     <img class="img-full" src="NUSUK_Image 1.png" alt="Nusuk app — product strategy overview">
   </div>
@@ -434,8 +478,14 @@
 
 <!-- ── VISUAL DIRECTION ────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">VISUAL DIRECTION</h2>
-  <p class="cs__body reveal reveal-d1">The visual direction of Nusuk is rooted in clarity, serenity, and cultural relevance — inspired by the spiritual essence of the pilgrimage. We conducted a collaborative workshop with the client to define the visual direction of Nusuk. This helped align both teams on the key attributes that should guide the brand's visual expression.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">VISUAL DIRECTION</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">The visual direction of Nusuk is rooted in <strong>clarity, serenity, and cultural relevance</strong> — inspired by the spiritual essence of the pilgrimage. We conducted a collaborative workshop with the client to define the visual direction of Nusuk. This helped align both teams on the key attributes that should guide the brand's visual expression.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images reveal">
     <img class="img-full" src="nusuk_Image 5.png" alt="Visual direction workshop — moodboard and references">
   </div>
@@ -443,15 +493,17 @@
 
 <!-- ── BRAND IDENTITY ──────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">BRAND IDENTITY</h2>
-  <p class="cs__body reveal reveal-d1">At its core, we placed the Kaaba as a symbolic and visual anchor to reflect the centrality of faith in the user's journey. The design language embraces simplicity and clarity, while the color palette draws inspiration from the Arabic world — rich, warm, and grounded in tradition. Every element is crafted with a user-centered mindset, aiming to create a respectful, intuitive, and meaningful experience for Muslims around the globe.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">BRAND IDENTITY</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">At its core, we placed <strong>the Kaaba as a symbolic and visual anchor</strong> to reflect the centrality of faith in the user's journey. The design language embraces simplicity and clarity, while the color palette draws inspiration from the Arabic world — <strong>rich, warm, and grounded in tradition</strong>. Every element is crafted with a user-centered mindset, aiming to create a respectful, intuitive, and meaningful experience for Muslims around the globe.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images">
     <div class="img-pair reveal">
       <img src="nusuk_Image 7.png" alt="Brand identity — Nusuk community and user context">
-      <div class="img-empty"></div>
-    </div>
-    <div class="img-pair reveal" style="margin-top: clamp(48px, 6vw, 80px);">
-      <div class="img-empty"></div>
       <img src="nusuk_Image 8.png" alt="Nusuk platform — existing experience analysis">
     </div>
   </div>
@@ -459,8 +511,14 @@
 
 <!-- ── STAKEHOLDER ALIGNMENT ──────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">STAKEHOLDER<br>ALIGNMENT</h2>
-  <p class="cs__body reveal reveal-d1">As part of the project milestones, we had the opportunity to present our work in two key sessions with the Ministry of Hajj and Umrah of Saudi Arabia. These presentations allowed us to showcase the design strategy and proposed experience for Nusuk. We also conducted a collaborative workshop with multiple stakeholders to gather feedback, align expectations, and identify opportunities for scaling the project further.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">STAKEHOLDER ALIGNMENT</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">As part of the project milestones, we had the opportunity to present our work in <strong>two key sessions with the Ministry of Hajj and Umrah of Saudi Arabia</strong>. These presentations allowed us to showcase the design strategy and proposed experience for Nusuk. We also conducted a collaborative workshop with multiple stakeholders to gather feedback, align expectations, and identify opportunities for scaling the project further.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images">
     <div class="img-pair reveal">
       <img src="nusuk_Image 9.png" alt="Workshop — synthesis and sticky notes session">
@@ -471,8 +529,14 @@
 
 <!-- ── KEY FEATURES ────────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">KEY FEATURES AND<br>THE IMPORTANCE OF<br>ISLAMIC SERVICES</h2>
-  <p class="cs__body reveal reveal-d1">Nusuk offers a variety of features designed to support pilgrims throughout their spiritual journey. Among these, the Islamic Services section stands as the heart of the app. It provides essential tools such as Prayer Times, Qibla Direction, Nearby Mosques, and Guidance for Rituals. These features are crucial because they maintaining spiritual focus, fulfilling religious duties, and observing the rituals correctly and on time. By integrating these services in a clear and accessible way, Nusuk ensures that users can remain centered on their faith without needing to switch between multiple apps or sources.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">KEY FEATURES AND THE IMPORTANCE OF ISLAMIC SERVICES</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">Nusuk offers a variety of features designed to support pilgrims throughout their spiritual journey. Among these, the Islamic Services section stands as the heart of the app. It provides essential tools such as <strong>Prayer Times, Qibla Direction, Nearby Mosques, and Guidance for Rituals</strong>. These features are crucial because they maintaining spiritual focus, fulfilling religious duties, and observing the rituals correctly and on time. By integrating these services in a clear and accessible way, Nusuk ensures that users can remain centered on their faith without needing to switch between multiple apps or sources.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images reveal">
     <img class="img-full" src="nusuk_Image 11.png" alt="Prayer Times feature — key Islamic services">
   </div>
@@ -480,39 +544,43 @@
 
 <!-- ── THE PROCESS ─────────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">THE PROCESS</h2>
-
-  <div class="phases">
-    <div class="phase reveal">
-      <div class="phase__num">01</div>
-      <div>
-        <div class="phase__name">Discovery &amp; Research</div>
-        <p class="phase__desc">Understanding the needs of Muslim users engaging with the app daily and during pilgrimage (Umrah &amp; Hajj). I conducted benchmarking analysis of Islamic apps and government digital platforms, defined user personas (everyday worshippers, first-time pilgrims, frequent pilgrims) and collaborated with UX Researchers and Product Owners to analyze user pain points across journeys — spiritual, emotional, and logistical.</p>
-      </div>
-    </div>
-    <div class="phase reveal reveal-d1">
-      <div class="phase__num">02</div>
-      <div>
-        <div class="phase__name">UX Strategy &amp; Information Architecture</div>
-        <p class="phase__desc">Establishing a coherent and scalable IA for spiritual and service-oriented content. I mapped complex flows (e.g., planning a pilgrimage, mood tracking, Quran engagement) into simpler, mobile-first journeys and facilitated alignment sessions between stakeholders, developers, and content teams.</p>
-      </div>
-    </div>
-    <div class="phase reveal reveal-d2">
-      <div class="phase__num">03</div>
-      <div>
-        <div class="phase__name">UI Design &amp; Design System</div>
-        <p class="phase__desc">Translating user flows into accessible, scalable, and visually respectful UI aligned with both modern standards and Islamic traditions. We collaborated with the DesignOps team to create a new Design System with new spiritual use-cases and color treatments, working closely with developers to ensure accessibility, alignment, and performance on both iOS and Android.</p>
-      </div>
-    </div>
-    <div class="phase reveal reveal-d3">
-      <div class="phase__num">04</div>
-      <div>
-        <div class="phase__name">Handover to Development</div>
-        <p class="phase__desc">Preparing the product for launch in multiple markets with multilingual and culturally adaptive support. We adapted layouts and design components to support Arabic as the primary language (RTL design) ensuring compatibility across various screen sizes and accessibility standards.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">THE PROCESS</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <div class="phases">
+          <div class="phase reveal">
+            <div class="phase__num">01</div>
+            <div>
+              <div class="phase__name">Discovery &amp; Research</div>
+              <p class="phase__desc">Understanding the needs of Muslim users engaging with the app daily and during pilgrimage (Umrah &amp; Hajj). I conducted benchmarking analysis of Islamic apps and government digital platforms, defined user personas (everyday worshippers, first-time pilgrims, frequent pilgrims) and collaborated with UX Researchers and Product Owners to analyze user pain points across journeys — spiritual, emotional, and logistical.</p>
+            </div>
+          </div>
+          <div class="phase reveal reveal-d1">
+            <div class="phase__num">02</div>
+            <div>
+              <div class="phase__name">UX Strategy &amp; Information Architecture</div>
+              <p class="phase__desc">Establishing a coherent and scalable IA for spiritual and service-oriented content. I mapped complex flows (e.g., planning a pilgrimage, mood tracking, Quran engagement) into simpler, mobile-first journeys and facilitated alignment sessions between stakeholders, developers, and content teams.</p>
+            </div>
+          </div>
+          <div class="phase reveal reveal-d2">
+            <div class="phase__num">03</div>
+            <div>
+              <div class="phase__name">UI Design &amp; Design System</div>
+              <p class="phase__desc">Translating user flows into accessible, scalable, and visually respectful UI aligned with both modern standards and Islamic traditions. We collaborated with the DesignOps team to create a new Design System with new spiritual use-cases and color treatments, working closely with developers to ensure accessibility, alignment, and performance on both iOS and Android.</p>
+            </div>
+          </div>
+          <div class="phase reveal reveal-d3">
+            <div class="phase__num">04</div>
+            <div>
+              <div class="phase__name">Handover to Development</div>
+              <p class="phase__desc">Preparing the product for launch in multiple markets with multilingual and culturally adaptive support. We adapted layouts and design components to support Arabic as the primary language (RTL design) ensuring compatibility across various screen sizes and accessibility standards.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
   <div class="cs__images">
     <div class="img-pair reveal">
       <img src="nusuk_Image 12.png" alt="Journey flow — Explore Rawdah screens">

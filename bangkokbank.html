@@ -156,44 +156,42 @@
       padding-bottom: 0;
     }
     .hero__inner {
-      padding: 0 var(--pad-x) clamp(48px, 6vw, 80px);
-      display: flex; flex-direction: column; gap: 24px;
+      padding: 0 var(--pad-x);
+      display: flex; flex-direction: column; align-items: center;
     }
-    .hero__back {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--ink-60);
-      transition: color .2s; width: fit-content;
+    .hero__sponsor {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 10px;
+      margin-top: clamp(120px, 18vh, 240px);
     }
-    .hero__back:hover { color: var(--ink); }
-    .hero__back svg { width: 14px; height: 14px; flex-shrink: 0; }
-    .hero__pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hero__sponsor-logo { height: clamp(28px, 2.2vw, 32px); width: auto; display: block; }
+    .hero__sponsor-text {
+      font-family: var(--title); font-size: clamp(16px, 1.4vw, 21px);
+      color: var(--ink-60); letter-spacing: -0.01em;
+    }
+    .hero__subtitle {
+      font-family: var(--title); font-size: 18px; font-weight: 700;
+      color: var(--ink); line-height: 1.6; letter-spacing: -0.01em;
+      text-align: center; max-width: 480px;
+      margin: clamp(16px, 2vw, 24px) auto 0;
+    }
+    .hero__pills {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+      margin-top: clamp(16px, 2vw, 24px);
+      margin-bottom: clamp(100px, 12vw, 160px);
+    }
     .hero__pill {
       font-family: var(--mono); font-size: 10px; letter-spacing: .06em;
       text-transform: uppercase; padding: 6px 14px; border-radius: 999px;
     }
-    .hero__pill--accent { background: var(--accent); color: var(--ink); font-weight: 600; }
+    .hero__pill--accent { border: 1px solid var(--ink-20); color: var(--ink-60); }
     .hero__pill--outline { border: 1px solid var(--ink-20); color: var(--ink-60); }
-    .hero__title {
-      font-family: var(--display); font-weight: 900;
-      font-size: clamp(88px, 16vw, 220px);
-      line-height: .86; letter-spacing: -0.03em;
-      text-transform: uppercase; color: var(--ink);
-    }
-    .hero__subtitle {
-      font-family: var(--title); font-size: clamp(16px, 1.5vw, 22px);
-      color: var(--ink-60); line-height: 1.6;
-      max-width: 560px; letter-spacing: -0.01em;
-    }
-    .hero__image {
-      padding: 0 var(--pad-x);
-    }
+    .hero__image { padding: 0; }
     .hero__image img { width: 100%; height: auto; display: block; }
 
     /* ─── INFO STRIP ──────────────────────────────────────────── */
     .info-strip {
       padding: clamp(48px, 5vw, 72px) var(--pad-x);
-      border-top: 1px solid var(--ink-20);
     }
     .info-grid {
       display: grid; grid-template-columns: repeat(4, 1fr);
@@ -216,39 +214,59 @@
     /* ─── CONTENT SECTIONS ────────────────────────────────────── */
     .cs {
       padding: clamp(80px, 8vw, 120px) var(--pad-x);
-      border-top: 1px solid var(--ink-20);
     }
-    .cs--no-border { border-top: none; }
+    .cs__layout {
+      display: grid;
+      grid-template-columns: minmax(120px, 18%) minmax(0, 780px);
+      gap: clamp(16px, 2vw, 32px);
+      align-items: start;
+    }
     .cs__eyebrow {
       font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
       text-transform: uppercase; color: var(--ink-60); margin-bottom: 16px;
     }
     .cs__heading {
-      font-family: var(--display); font-weight: 900;
-      font-size: clamp(36px, 5vw, 72px);
-      line-height: .9; letter-spacing: -0.025em; text-transform: uppercase;
-      color: var(--ink); margin-bottom: clamp(24px, 3vw, 40px);
+      font-family: var(--title); font-weight: 500;
+      font-size: clamp(13px, 1vw, 14px);
+      line-height: 1.5; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--ink);
     }
+    .cs__content { display: flex; flex-direction: column; align-items: center; }
+    .cs__text { padding: 0 clamp(16px, 4vw, 56px); max-width: 720px; }
     .cs__body {
       font-family: var(--title); font-size: clamp(15px, 1.2vw, 18px);
       line-height: 1.75; color: var(--ink-60);
-      max-width: 720px; letter-spacing: -0.01em;
+      letter-spacing: -0.01em;
     }
     .cs__body strong { font-weight: 600; color: var(--ink); }
-    .cs__images { margin-top: clamp(48px, 6vw, 80px); }
+    .cs__images {
+      width: 100vw; position: relative; left: 50%; margin-left: -50vw;
+      margin-top: clamp(160px, 16vw, 240px);
+    }
+    @media (max-width: 800px) {
+      .cs__layout { grid-template-columns: 1fr; gap: 0; }
+      .cs__heading { margin-bottom: clamp(16px, 4vw, 24px); }
+      .cs__text { padding: 0; max-width: none; }
+    }
 
     /* full-width image */
     .img-full { width: 100%; height: auto; display: block; }
 
-    /* image pair (2 cols) */
+    /* image pair (2 cols, edge-to-edge with inner-corner rounding) */
     .img-pair {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(16px, 2vw, 32px);
+      gap: clamp(16px, 2vw, 24px);
+      aspect-ratio: 21 / 9;
     }
-    @media (max-width: 640px) { .img-pair { grid-template-columns: 1fr; } }
-    .img-pair img { width: 100%; height: auto; display: block; }
-    .img-pair .img-empty { display: block; }
-    @media (max-width: 640px) { .img-pair .img-empty { display: none; } }
+    .img-pair img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .img-pair > *:first-child { border-radius: 0 16px 16px 0; }
+    .img-pair > *:last-child { border-radius: 16px 0 0 16px; }
+    @media (max-width: 640px) {
+      .img-pair { grid-template-columns: 1fr; aspect-ratio: auto; }
+      .img-pair img { height: auto; }
+      .img-pair > *:first-child { border-radius: 0 0 16px 16px; }
+      .img-pair > *:last-child { border-radius: 16px 16px 0 0; }
+    }
 
     /* image caption */
     .img-cap {
@@ -280,7 +298,7 @@
     }
 
     /* ─── OTHER PROJECTS ──────────────────────────────────────── */
-    .other { padding: clamp(80px, 8vw, 120px) var(--pad-x); border-top: 1px solid var(--ink-20); }
+    .other { padding: clamp(80px, 8vw, 120px) var(--pad-x); }
     .other__label {
       font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
       text-transform: uppercase; color: var(--ink-60); margin-bottom: 32px;
@@ -326,7 +344,6 @@
     /* ─── FOOTER ──────────────────────────────────────────────── */
     .footer {
       padding: clamp(80px, 8vw, 120px) var(--pad-x) clamp(120px, 14vw, 200px);
-      border-top: 1px solid var(--ink-20);
       display: flex; flex-direction: column; gap: clamp(24px, 3vw, 40px);
     }
     .footer__connect {
@@ -368,19 +385,16 @@
   </div>
 
   <div class="hero__inner">
-    <a class="hero__back" href="index.html#projects">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-        <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
-      </svg>
-      Back to work
-    </a>
+    <div class="hero__sponsor reveal">
+      <img class="hero__sponsor-logo" src="bangkokbank_logo.png" alt="Bangkok Bank">
+      <span class="hero__sponsor-text">– in collaboration with Designit</span>
+    </div>
+    <p class="hero__subtitle">An international project within one of the most important banks in Thailand, focused on helping the team define the app's experience vision while supporting them in improving their ways of working.</p>
     <div class="hero__pills">
       <span class="hero__pill hero__pill--accent">UX Research &amp; UX Strategy</span>
       <span class="hero__pill hero__pill--outline">Banking</span>
       <span class="hero__pill hero__pill--outline">2023</span>
     </div>
-    <h1 class="hero__title">BANGKOK<br>BANK</h1>
-    <p class="hero__subtitle">An international project within one of the most important banks in Thailand, focused on helping the team define the app's experience vision while supporting them in improving their ways of working.</p>
   </div>
 
   <div class="hero__image reveal">
@@ -412,8 +426,14 @@
 
 <!-- ── THE CLIENT ──────────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">THE CLIENT</h2>
-  <p class="cs__body reveal reveal-d1">Bangkok Bank is one of the largest and most established commercial banks in Southeast Asia, with a strong presence in both corporate and retail banking. Known for its extensive branch network and deep-rooted trust among Thai customers, the bank has been gradually shifting toward digital transformation to stay competitive in a fast-evolving financial landscape. Our collaboration focused on supporting their internal design and product teams as they worked to modernize the mobile banking experience and adopt more agile, user-centered ways of working.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">THE CLIENT</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">Bangkok Bank is <strong>one of the largest and most established commercial banks in Southeast Asia</strong>, with a strong presence in both corporate and retail banking. Known for its extensive branch network and deep-rooted trust among Thai customers, the bank has been gradually shifting toward digital transformation to stay competitive in a fast-evolving financial landscape. Our collaboration focused on supporting their internal design and product teams as they worked to <strong>modernize the mobile banking experience and adopt more agile, user-centered ways of working</strong>.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images">
     <div class="img-pair reveal">
       <img src="bangkok_Image 2.png" alt="Bangkok Bank — client context">
@@ -424,8 +444,14 @@
 
 <!-- ── THE CHALLENGE ───────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">THE CHALLENGE</h2>
-  <p class="cs__body reveal reveal-d1">The core objective of the project at Bangkok Bank was to define a clear experience vision for the mobile app while improving internal design processes across teams. One of the biggest challenges lay in navigating a highly hierarchical culture and traditional workflows that often slowed down collaboration and decision-making. Aligning stakeholders, introducing Agile methodologies, and shifting toward a more user-centered mindset required both cultural sensitivity and patience. Working in-situ for six months was key — it allowed us to build trust, understand the team's daily dynamics, and adapt our approach to create lasting change from within.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">THE CHALLENGE</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">The core objective of the project at Bangkok Bank was to define a clear experience vision for the mobile app while improving internal design processes across teams. One of the biggest challenges lay in <strong>navigating a highly hierarchical culture and traditional workflows</strong> that often slowed down collaboration and decision-making. Aligning stakeholders, introducing Agile methodologies, and shifting toward a more user-centered mindset required both cultural sensitivity and patience. <strong>Working in-situ for six months was key</strong> — it allowed us to build trust, understand the team's daily dynamics, and adapt our approach to create lasting change from within.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images reveal">
     <img class="img-full" src="bagkok_Image 4.png" alt="Bangkok Bank — challenge and problem space">
   </div>
@@ -433,8 +459,14 @@
 
 <!-- ── THE STRATEGY ────────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">THE STRATEGY</h2>
-  <p class="cs__body reveal reveal-d1">To guide the transformation, we devised a UX strategy plan that helped interconnect the dots across teams and align efforts toward a shared vision. This strategy focused on defining a clear future state for the user experience — where we wanted UX to go and why it mattered to both the business and end users. We established measurable goals to track progress and ensure alignment with the overall product direction. Finally, we mapped out a concrete plan to get there, outlining key initiatives, priorities, and process improvements. This approach not only clarified the long-term UX vision but also gave teams the structure and tools they needed to move forward with consistency and purpose.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">THE STRATEGY</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">To guide the transformation, we devised <strong>a UX strategy plan</strong> that helped interconnect the dots across teams and align efforts toward a shared vision. This strategy focused on defining a clear future state for the user experience — where we wanted UX to go and why it mattered to both the business and end users. We established <strong>measurable goals to track progress</strong> and ensure alignment with the overall product direction. Finally, we mapped out a concrete plan to get there, outlining key initiatives, priorities, and process improvements. This approach not only clarified the long-term UX vision but also gave teams the structure and tools they needed to move forward with consistency and purpose.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images reveal">
     <img class="img-full" src="bangkok_Image 6.png" alt="Bangkok Bank — strategy details">
   </div>
@@ -442,8 +474,14 @@
 
 <!-- ── THE INNOVATION LAB ──────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">THE INNOVATION LAB</h2>
-  <p class="cs__body reveal reveal-d1">To foster creativity and experimentation we proposed the structure of an Innovation Lab to be used to test new technologies, methodologies, and business models. We identified the stakeholders involved with the team and evaluated their influence on projects. Additionally, we outlined the team's structure and provided an overview of a typical week in the team's operations. During this workshop we introduced them the concept of an Innovation Lab team and facilitate collaboration to identify potential projects for the team to work on and create a Project Backlog.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">THE INNOVATION LAB</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">To foster creativity and experimentation we proposed the structure of an Innovation Lab to be used to <strong>test new technologies, methodologies, and business models</strong>. We identified the stakeholders involved with the team and evaluated their influence on projects. Additionally, we outlined the team's structure and provided an overview of a typical week in the team's operations. During this workshop we introduced them the concept of an Innovation Lab team and facilitate collaboration to identify potential projects for the team to work on and <strong>create a Project Backlog</strong>.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images reveal">
     <img class="img-full" src="bangkok_Image 7.png" alt="Bangkok Bank — Innovation Lab workshop">
   </div>

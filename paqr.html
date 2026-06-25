@@ -155,45 +155,41 @@
       padding-top: clamp(88px, 11vw, 128px);
       padding-bottom: 0;
     }
-    .hero__inner {
-      padding: 0 var(--pad-x) clamp(48px, 6vw, 80px);
-      display: flex; flex-direction: column; gap: 24px;
+    .hero__sponsor {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 10px;
+      padding: 0 var(--pad-x);
+      margin-top: clamp(120px, 18vh, 240px);
     }
-    .hero__back {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--ink-60);
-      transition: color .2s; width: fit-content;
+    .hero__sponsor-logo { height: clamp(18px, 1.6vw, 24px); width: auto; display: block; }
+    .hero__sponsor-text {
+      font-family: var(--title); font-size: clamp(16px, 1.4vw, 21px);
+      color: var(--ink-60); letter-spacing: -0.01em;
     }
-    .hero__back:hover { color: var(--ink); }
-    .hero__back svg { width: 14px; height: 14px; flex-shrink: 0; }
-    .hero__pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hero__pills {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+      padding: 0 var(--pad-x);
+      margin-top: clamp(16px, 2vw, 24px);
+      margin-bottom: clamp(100px, 12vw, 160px);
+    }
     .hero__pill {
       font-family: var(--mono); font-size: 10px; letter-spacing: .06em;
       text-transform: uppercase; padding: 6px 14px; border-radius: 999px;
     }
-    .hero__pill--accent { background: var(--accent); color: var(--ink); font-weight: 600; }
+    .hero__pill--accent { border: 1px solid var(--ink-20); color: var(--ink-60); }
     .hero__pill--outline { border: 1px solid var(--ink-20); color: var(--ink-60); }
-    .hero__title {
-      font-family: var(--display); font-weight: 900;
-      font-size: clamp(88px, 16vw, 220px);
-      line-height: .86; letter-spacing: -0.03em;
-      text-transform: uppercase; color: var(--ink);
-    }
     .hero__subtitle {
-      font-family: var(--title); font-size: clamp(16px, 1.5vw, 22px);
-      color: var(--ink-60); line-height: 1.6;
-      max-width: 560px; letter-spacing: -0.01em;
-    }
-    .hero__image {
+      font-family: var(--title); font-size: 18px; font-weight: 700;
+      color: var(--ink); line-height: 1.6; letter-spacing: -0.01em;
+      text-align: center; max-width: 480px; margin: clamp(16px, 2vw, 24px) auto 0;
       padding: 0 var(--pad-x);
     }
+    .hero__image { padding: 0; }
     .hero__image img { width: 100%; height: auto; display: block; }
 
     /* ─── INFO STRIP ──────────────────────────────────────────── */
     .info-strip {
       padding: clamp(48px, 5vw, 72px) var(--pad-x);
-      border-top: 1px solid var(--ink-20);
     }
     .info-grid {
       display: grid; grid-template-columns: repeat(4, 1fr);
@@ -216,39 +212,63 @@
     /* ─── CONTENT SECTIONS ────────────────────────────────────── */
     .cs {
       padding: clamp(80px, 8vw, 120px) var(--pad-x);
-      border-top: 1px solid var(--ink-20);
     }
     .cs--no-border { border-top: none; }
+    .cs__layout {
+      display: grid;
+      grid-template-columns: minmax(120px, 18%) minmax(0, 780px);
+      gap: clamp(16px, 2vw, 32px);
+      align-items: start;
+    }
     .cs__eyebrow {
       font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
       text-transform: uppercase; color: var(--ink-60); margin-bottom: 16px;
     }
     .cs__heading {
-      font-family: var(--display); font-weight: 900;
-      font-size: clamp(36px, 5vw, 72px);
-      line-height: .9; letter-spacing: -0.025em; text-transform: uppercase;
-      color: var(--ink); margin-bottom: clamp(24px, 3vw, 40px);
+      font-family: var(--title); font-weight: 500;
+      font-size: clamp(13px, 1vw, 14px);
+      line-height: 1.5; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--ink);
     }
+    .cs__content { display: flex; flex-direction: column; align-items: center; }
+    .cs__text { padding: 0 clamp(16px, 4vw, 56px); max-width: 720px; }
     .cs__body {
       font-family: var(--title); font-size: clamp(15px, 1.2vw, 18px);
       line-height: 1.75; color: var(--ink-60);
-      max-width: 720px; letter-spacing: -0.01em;
+      letter-spacing: -0.01em;
     }
     .cs__body strong { font-weight: 600; color: var(--ink); }
-    .cs__images { margin-top: clamp(48px, 6vw, 80px); }
+    .cs__images {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-top: clamp(160px, 16vw, 240px);
+    }
+    @media (max-width: 800px) {
+      .cs__layout { grid-template-columns: 1fr; gap: 0; }
+      .cs__heading { margin-bottom: clamp(16px, 4vw, 24px); }
+      .cs__text { padding: 0; max-width: none; }
+    }
 
     /* full-width image */
     .img-full { width: 100%; height: auto; display: block; }
 
-    /* image pair (2 cols) */
+    /* image pair (2 cols, edge-to-edge with inner-corner rounding) */
     .img-pair {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(16px, 2vw, 32px);
+      gap: clamp(16px, 2vw, 24px);
+      aspect-ratio: 21 / 9;
     }
-    @media (max-width: 640px) { .img-pair { grid-template-columns: 1fr; } }
-    .img-pair img { width: 100%; height: auto; display: block; }
-    .img-pair .img-empty { display: block; }
-    @media (max-width: 640px) { .img-pair .img-empty { display: none; } }
+    .img-pair img,
+    .img-pair video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .img-pair > *:first-child { border-radius: 0 16px 16px 0; }
+    .img-pair > *:last-child { border-radius: 16px 0 0 16px; }
+    @media (max-width: 640px) {
+      .img-pair { grid-template-columns: 1fr; aspect-ratio: auto; }
+      .img-pair img,
+      .img-pair video { height: auto; }
+      .img-pair > *:first-child { border-radius: 0 0 16px 16px; }
+      .img-pair > *:last-child { border-radius: 16px 16px 0 0; }
+    }
 
     /* image caption */
     .img-cap {
@@ -257,14 +277,12 @@
     }
 
     /* ─── PROCESS PHASES ──────────────────────────────────────── */
-    .phases { margin-top: clamp(32px, 4vw, 48px); }
+    .phases { margin-top: 0; }
     .phase {
-      padding: clamp(24px, 3vw, 36px) 0;
-      border-top: 1px solid var(--ink-20);
+      padding: clamp(16px, 2vw, 20px) 0;
       display: grid; grid-template-columns: 48px 1fr;
       gap: 24px; align-items: start;
     }
-    .phase:last-child { border-bottom: 1px solid var(--ink-20); }
     .phase__num {
       font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
       color: var(--ink-60); padding-top: 4px;
@@ -286,7 +304,7 @@
     .cs--dark .cs__body strong { color: #fff; }
 
     /* ─── OTHER PROJECTS ──────────────────────────────────────── */
-    .other { padding: clamp(80px, 8vw, 120px) var(--pad-x); border-top: 1px solid var(--ink-20); }
+    .other { padding: clamp(80px, 8vw, 120px) var(--pad-x); }
     .other__label {
       font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
       text-transform: uppercase; color: var(--ink-60); margin-bottom: 32px;
@@ -332,7 +350,6 @@
     /* ─── FOOTER ──────────────────────────────────────────────── */
     .footer {
       padding: clamp(80px, 8vw, 120px) var(--pad-x) clamp(120px, 14vw, 200px);
-      border-top: 1px solid var(--ink-20);
       display: flex; flex-direction: column; gap: clamp(24px, 3vw, 40px);
     }
     .footer__connect {
@@ -373,24 +390,21 @@
     </div>
   </div>
 
-  <div class="hero__inner">
-    <a class="hero__back" href="index.html#projects">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-        <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
-      </svg>
-      Back to work
-    </a>
-    <div class="hero__pills">
-      <span class="hero__pill hero__pill--accent">Design System &amp; User Experience</span>
-      <span class="hero__pill hero__pill--outline">B2B</span>
-      <span class="hero__pill hero__pill--outline">2026</span>
-    </div>
-    <h1 class="hero__title">PAQR</h1>
-    <p class="hero__subtitle">PAQR is a specialized data ecosystem that bridges the information gap between Packaging Material Suppliers, Brand Owners and Retailers, designed to turn a complex regulatory burden into a guided, automated compliance workflow.</p>
+  <div class="hero__sponsor reveal">
+    <img class="hero__sponsor-logo" src="paqr_logomark.png" alt="PAQR">
+    <span class="hero__sponsor-text">– sponsored by Synopticons</span>
+  </div>
+
+  <p class="hero__subtitle">PAQR turns complex EU packaging compliance into a guided, automated workflow - connecting suppliers, brand owners and retailers in one place.</p>
+
+  <div class="hero__pills">
+    <span class="hero__pill hero__pill--accent">Design System &amp; User Experience</span>
+    <span class="hero__pill hero__pill--outline">B2B</span>
+    <span class="hero__pill hero__pill--outline">2026</span>
   </div>
 
   <div class="hero__image reveal">
-    <img src="PAQR logo visual.png" alt="PAQR — product overview">
+    <img src="PAQR updated thumbnail.png" alt="PAQR — product overview">
   </div>
 </section>
 
@@ -418,8 +432,14 @@
 
 <!-- ── THE CHALLENGE ───────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">THE CHALLENGE</h2>
-  <p class="cs__body reveal reveal-d1">PAQR was born to solve a critical and urgent problem: the EU's new Packaging and Packaging Waste Regulation (PPWR) requires every business placing packaged goods on the European market to issue a Declaration of Conformity by August 2026, yet most companies lack the tools, structure, and supplier data to do so. The challenge was to design a platform complex enough to handle regulatory compliance at scale, but simple enough for any business — from solo operators to enterprise teams — to use without a dedicated packaging department.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">THE CHALLENGE</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">PAQR was born to solve a critical and urgent problem: the EU's new Packaging and Packaging Waste Regulation (PPWR) requires every business placing packaged goods on the European market to <strong>issue a Declaration of Conformity by August 2026</strong>, yet most companies lack the tools, structure, and supplier data to do so. The challenge was to design a platform <strong>complex enough to handle regulatory compliance at scale, but simple enough for any business</strong> — from solo operators to enterprise teams — to use without a dedicated packaging department.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images reveal">
     <img class="img-full" src="paqr thumbnail.png" alt="PAQR — challenge overview">
   </div>
@@ -427,15 +447,17 @@
 
 <!-- ── THE STRATEGY ────────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">THE STRATEGY</h2>
-  <p class="cs__body reveal reveal-d1">PAQR's strategy was to turn a complex regulatory burden into a guided, automated workflow. Rather than building another compliance checklist, we designed a centralized data ecosystem where packaging components, supplier documentation, and Declarations of Conformity live in one auditable workspace. The platform needed to serve three very different user types — small businesses, enterprise compliance teams, and packaging suppliers — so the UX strategy focused on progressive complexity: simple entry points for first-time users, and powerful data management tools for teams handling hundreds of components across multiple brands.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">THE STRATEGY</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">PAQR's strategy was to turn a complex regulatory burden into <strong>a guided, automated workflow</strong>. Rather than building another compliance checklist, we designed a centralized data ecosystem where packaging components, supplier documentation, and Declarations of Conformity live in one auditable workspace. The platform needed to serve three very different user types — <strong>small businesses, enterprise compliance teams, and packaging suppliers</strong> — so the UX strategy focused on <strong>progressive complexity</strong>: simple entry points for first-time users, and powerful data management tools for teams handling hundreds of components across multiple brands.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images">
     <div class="img-pair reveal">
       <img src="mockupmobile.png" alt="PAQR — mobile platform">
-      <div class="img-empty"></div>
-    </div>
-    <div class="img-pair reveal" style="margin-top: clamp(48px, 6vw, 80px);">
-      <div class="img-empty"></div>
       <img src="menu PAQR.png" alt="PAQR — product navigation">
     </div>
   </div>
@@ -443,34 +465,40 @@
 
 <!-- ── WHAT PAQR DOES ──────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">WHAT PAQR DOES</h2>
-  <div class="phases">
-    <div class="phase reveal">
-      <div class="phase__num">01</div>
-      <div>
-        <div class="phase__name">Packaging Data Orchestration</div>
-        <p class="phase__desc">Streamlining data collection from business partners through supplier catalogues, automated requests and smart validation.</p>
-      </div>
-    </div>
-    <div class="phase reveal reveal-d1">
-      <div class="phase__num">02</div>
-      <div>
-        <div class="phase__name">Compliance Assistant</div>
-        <p class="phase__desc">Leveraging AI-driven tools to issue Declarations of Conformity that grow with legal requirements.</p>
-      </div>
-    </div>
-    <div class="phase reveal reveal-d2">
-      <div class="phase__num">03</div>
-      <div>
-        <div class="phase__name">Audit-ready Data and Documentation</div>
-        <p class="phase__desc">Creating a single, secure source of truth with tamper-proof, version-controlled records.</p>
-      </div>
-    </div>
-    <div class="phase reveal reveal-d3">
-      <div class="phase__num">04</div>
-      <div>
-        <div class="phase__name">Future-proof Packaging Data</div>
-        <p class="phase__desc">Preparing businesses for the Digital Product Passport and QR code requirements ahead.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">WHAT PAQR DOES</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <div class="phases">
+          <div class="phase reveal">
+            <div class="phase__num">01</div>
+            <div>
+              <div class="phase__name">Packaging Data Orchestration</div>
+              <p class="phase__desc">Streamlining data collection from business partners through supplier catalogues, automated requests and smart validation.</p>
+            </div>
+          </div>
+          <div class="phase reveal reveal-d1">
+            <div class="phase__num">02</div>
+            <div>
+              <div class="phase__name">Compliance Assistant</div>
+              <p class="phase__desc">Leveraging AI-driven tools to issue Declarations of Conformity that grow with legal requirements.</p>
+            </div>
+          </div>
+          <div class="phase reveal reveal-d2">
+            <div class="phase__num">03</div>
+            <div>
+              <div class="phase__name">Audit-ready Data and Documentation</div>
+              <p class="phase__desc">Creating a single, secure source of truth with tamper-proof, version-controlled records.</p>
+            </div>
+          </div>
+          <div class="phase reveal reveal-d3">
+            <div class="phase__num">04</div>
+            <div>
+              <div class="phase__name">Future-proof Packaging Data</div>
+              <p class="phase__desc">Preparing businesses for the Digital Product Passport and QR code requirements ahead.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -484,8 +512,14 @@
 
 <!-- ── DESIGN SYSTEM & FOUNDATIONS ────────────────────────────── -->
 <section class="cs cs--dark">
-  <h2 class="cs__heading reveal">DESIGN SYSTEM &amp;<br>FOUNDATIONS</h2>
-  <p class="cs__body reveal reveal-d1">Built from scratch as the sole designer, the PAQR Design System is structured for scale from day one. Foundations and components live in separate files — each with its own dedicated document — making it easier to evolve one without breaking the other. The token architecture covers color system, typography scale, spacing, and motion, all managed through Token Studio to bridge design directly into development. To scale faster without sacrificing consistency, I integrated AI into the workflow using Cursor — building components with all their states and variants in a fraction of the time.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">DESIGN SYSTEM &amp; FOUNDATIONS</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">Built from scratch as the sole designer, the PAQR Design System is <strong>structured for scale from day one</strong>. Foundations and components live in separate files — each with its own dedicated document — making it easier to evolve one without breaking the other. The token architecture covers color system, typography scale, spacing, and motion, all <strong>managed through Token Studio</strong> to bridge design directly into development. To scale faster without sacrificing consistency, I <strong>integrated AI into the workflow using Cursor</strong> — building components with all their states and variants in a fraction of the time.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images reveal">
     <img class="img-full" src="paqr_foundations.png" alt="PAQR — Design System">
   </div>
@@ -493,15 +527,17 @@
 
 <!-- ── BRAND IDENTITY ──────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">BRAND IDENTITY</h2>
-  <p class="cs__body reveal reveal-d1">PAQR's visual identity needed to communicate trust, precision, and regulatory authority, without feeling cold or bureaucratic. The design language is clean and structured, reflecting the platform's core promise: bringing order to complexity. Typography is sharp and functional, color is used purposefully to signal compliance status and guide attention, and the overall aesthetic positions PAQR as a professional-grade tool that enterprises can rely on — while remaining approachable enough for smaller businesses navigating EU regulation for the first time.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">BRAND IDENTITY</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">PAQR's visual identity needed to communicate <strong>trust, precision, and regulatory authority</strong>, without feeling cold or bureaucratic. The design language is clean and structured, reflecting the platform's core promise: <strong>bringing order to complexity</strong>. Typography is sharp and functional, color is used purposefully to signal compliance status and guide attention, and the overall aesthetic positions PAQR as <strong>a professional-grade tool that enterprises can rely on</strong> — while remaining approachable enough for smaller businesses navigating EU regulation for the first time.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images">
     <div class="img-pair reveal">
       <img src="branding PAQR.png" alt="PAQR — brand identity">
-      <div class="img-empty"></div>
-    </div>
-    <div class="img-pair reveal" style="margin-top: clamp(48px, 6vw, 80px);">
-      <div class="img-empty"></div>
       <video autoplay loop muted playsinline style="width:100%;height:auto;display:block;">
         <source src="paqr_loading.mp4" type="video/mp4">
       </video>
@@ -516,39 +552,43 @@
 
 <!-- ── THE PROCESS ─────────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">THE PROCESS</h2>
-
-  <div class="phases">
-    <div class="phase reveal">
-      <div class="phase__num">01</div>
-      <div>
-        <div class="phase__name">Discovery &amp; Research</div>
-        <p class="phase__desc">Understanding the regulatory landscape and the real pain points of businesses facing PPWR compliance. I mapped the three core user types — small businesses, enterprise compliance teams, and packaging suppliers — and analyzed how each interacts with packaging data, supplier networks, and documentation workflows. This phase included benchmarking existing compliance tools and identifying where manual processes were creating the most friction.</p>
-      </div>
-    </div>
-    <div class="phase reveal reveal-d1">
-      <div class="phase__num">02</div>
-      <div>
-        <div class="phase__name">UX Strategy &amp; Information Architecture</div>
-        <p class="phase__desc">Translating a complex regulatory framework into a simple, guided user journey. I defined the core workflows — component mapping, supplier data requests, and Declaration of Conformity generation — and structured the IA to support both first-time users and power users managing large portfolios. The goal was progressive complexity: easy to start, powerful at scale.</p>
-      </div>
-    </div>
-    <div class="phase reveal reveal-d2">
-      <div class="phase__num">03</div>
-      <div>
-        <div class="phase__name">MVP Launch &amp; Iterative Design</div>
-        <p class="phase__desc">As the sole designer, I built the Design System and brand identity from scratch, establishing the visual and component foundation for the entire platform. I work in two-week sprints alongside the CEO, Product Owner, and QA to define and prioritize new features. Each sprint runs in parallel: improving what's already live and adding new functionality. I collaborate directly with developers to ensure accurate implementation, bridging the gap between product vision and technical delivery. The Design System is continuously evolving — I use tools like Cursor and Token Studio to scale it efficiently, ensuring consistency across every new feature without slowing down delivery.</p>
-      </div>
-    </div>
-    <div class="phase reveal reveal-d3">
-      <div class="phase__num">04</div>
-      <div>
-        <div class="phase__name">Continuous Improvement</div>
-        <p class="phase__desc">PAQR is a live, evolving product. Every sprint brings new regulatory requirements, user feedback, and feature requests. My role is to keep design ahead of development, maintaining consistency through the design system while moving fast enough to meet the August 2026 PPWR deadline and the milestones that follow through 2040.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">THE PROCESS</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <div class="phases">
+          <div class="phase reveal">
+            <div class="phase__num">01</div>
+            <div>
+              <div class="phase__name">Discovery &amp; Research</div>
+              <p class="phase__desc">Understanding the regulatory landscape and the real pain points of businesses facing PPWR compliance. I mapped the three core user types — small businesses, enterprise compliance teams, and packaging suppliers — and analyzed how each interacts with packaging data, supplier networks, and documentation workflows. This phase included benchmarking existing compliance tools and identifying where manual processes were creating the most friction.</p>
+            </div>
+          </div>
+          <div class="phase reveal reveal-d1">
+            <div class="phase__num">02</div>
+            <div>
+              <div class="phase__name">UX Strategy &amp; Information Architecture</div>
+              <p class="phase__desc">Translating a complex regulatory framework into a simple, guided user journey. I defined the core workflows — component mapping, supplier data requests, and Declaration of Conformity generation — and structured the IA to support both first-time users and power users managing large portfolios. The goal was progressive complexity: easy to start, powerful at scale.</p>
+            </div>
+          </div>
+          <div class="phase reveal reveal-d2">
+            <div class="phase__num">03</div>
+            <div>
+              <div class="phase__name">MVP Launch &amp; Iterative Design</div>
+              <p class="phase__desc">As the sole designer, I built the Design System and brand identity from scratch, establishing the visual and component foundation for the entire platform. I work in two-week sprints alongside the CEO, Product Owner, and QA to define and prioritize new features. Each sprint runs in parallel: improving what's already live and adding new functionality. I collaborate directly with developers to ensure accurate implementation, bridging the gap between product vision and technical delivery. The Design System is continuously evolving — I use tools like Cursor and Token Studio to scale it efficiently, ensuring consistency across every new feature without slowing down delivery.</p>
+            </div>
+          </div>
+          <div class="phase reveal reveal-d3">
+            <div class="phase__num">04</div>
+            <div>
+              <div class="phase__name">Continuous Improvement</div>
+              <p class="phase__desc">PAQR is a live, evolving product. Every sprint brings new regulatory requirements, user feedback, and feature requests. My role is to keep design ahead of development, maintaining consistency through the design system while moving fast enough to meet the August 2026 PPWR deadline and the milestones that follow through 2040.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
   <div class="cs__images reveal">
     <img class="img-full" src="PAQR_screens.png" alt="PAQR — final platform screens">
   </div>

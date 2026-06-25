@@ -155,42 +155,42 @@
       padding-bottom: 0;
     }
     .hero__inner {
-      padding: 0 var(--pad-x) clamp(48px, 6vw, 80px);
-      display: flex; flex-direction: column; gap: 24px;
+      padding: 0 var(--pad-x);
+      display: flex; flex-direction: column; align-items: center;
     }
-    .hero__back {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--ink-60);
-      transition: color .2s; width: fit-content;
+    .hero__sponsor {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 10px;
+      margin-top: clamp(120px, 18vh, 240px);
     }
-    .hero__back:hover { color: var(--ink); }
-    .hero__back svg { width: 14px; height: 14px; flex-shrink: 0; }
-    .hero__pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hero__sponsor-logo { height: clamp(28px, 2.2vw, 32px); width: auto; display: block; }
+    .hero__sponsor-text {
+      font-family: var(--title); font-size: clamp(16px, 1.4vw, 21px);
+      color: var(--ink-60); letter-spacing: -0.01em;
+    }
+    .hero__subtitle {
+      font-family: var(--title); font-size: 18px; font-weight: 700;
+      color: var(--ink); line-height: 1.6; letter-spacing: -0.01em;
+      text-align: center; max-width: 480px;
+      margin: clamp(16px, 2vw, 24px) auto 0;
+    }
+    .hero__pills {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+      margin-top: clamp(16px, 2vw, 24px);
+      margin-bottom: clamp(100px, 12vw, 160px);
+    }
     .hero__pill {
       font-family: var(--mono); font-size: 10px; letter-spacing: .06em;
       text-transform: uppercase; padding: 6px 14px; border-radius: 999px;
     }
-    .hero__pill--accent { background: var(--accent); color: var(--ink); font-weight: 600; }
+    .hero__pill--accent { border: 1px solid var(--ink-20); color: var(--ink-60); }
     .hero__pill--outline { border: 1px solid var(--ink-20); color: var(--ink-60); }
-    .hero__title {
-      font-family: var(--display); font-weight: 900;
-      font-size: clamp(88px, 16vw, 220px);
-      line-height: .86; letter-spacing: -0.03em;
-      text-transform: uppercase; color: var(--ink);
-    }
-    .hero__subtitle {
-      font-family: var(--title); font-size: clamp(16px, 1.5vw, 22px);
-      color: var(--ink-60); line-height: 1.6;
-      max-width: 560px; letter-spacing: -0.01em;
-    }
-    .hero__image { padding: 0 var(--pad-x); }
+    .hero__image { padding: 0; }
     .hero__image img { width: 100%; height: auto; display: block; }
 
     /* ─── INFO STRIP ──────────────────────────────────────────── */
     .info-strip {
       padding: clamp(48px, 5vw, 72px) var(--pad-x);
-      border-top: 1px solid var(--ink-20);
     }
     .info-grid {
       display: grid; grid-template-columns: repeat(4, 1fr);
@@ -213,28 +213,44 @@
     /* ─── CONTENT SECTIONS ────────────────────────────────────── */
     .cs {
       padding: clamp(80px, 8vw, 120px) var(--pad-x);
-      border-top: 1px solid var(--ink-20);
+    }
+    .cs__layout {
+      display: grid;
+      grid-template-columns: minmax(120px, 18%) minmax(0, 780px);
+      gap: clamp(16px, 2vw, 32px);
+      align-items: start;
     }
     .cs__heading {
-      font-family: var(--display); font-weight: 900;
-      font-size: clamp(36px, 5vw, 72px);
-      line-height: .9; letter-spacing: -0.025em; text-transform: uppercase;
-      color: var(--ink); margin-bottom: clamp(24px, 3vw, 40px);
+      font-family: var(--title); font-weight: 500;
+      font-size: clamp(13px, 1vw, 14px);
+      line-height: 1.5; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--ink);
     }
+    .cs__content { display: flex; flex-direction: column; align-items: center; }
+    .cs__text { padding: 0 clamp(16px, 4vw, 56px); max-width: 720px; }
     .cs__body {
       font-family: var(--title); font-size: clamp(15px, 1.2vw, 18px);
       line-height: 1.75; color: var(--ink-60);
-      max-width: 720px; letter-spacing: -0.01em;
+      letter-spacing: -0.01em;
     }
     .cs__body strong { font-weight: 600; color: var(--ink); }
-    .cs__images { margin-top: clamp(48px, 6vw, 80px); }
+    .cs__images {
+      width: 100vw; position: relative; left: 50%; margin-left: -50vw;
+      margin-top: clamp(160px, 16vw, 240px);
+    }
+    @media (max-width: 800px) {
+      .cs__layout { grid-template-columns: 1fr; gap: 0; }
+      .cs__heading { margin-bottom: clamp(16px, 4vw, 24px); }
+      .cs__text { padding: 0; max-width: none; }
+    }
 
     .img-full { width: 100%; height: auto; display: block; }
 
-    /* ─── IMAGE PAIR (2-col, one may be empty) ────────────────── */
+    /* ─── IMAGE PAIR (2-col, one may be empty — full-bleed editorial layout) ── */
     .img-pair {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: clamp(16px, 2vw, 32px);
+      width: 100vw; position: relative; left: 50%; margin-left: -50vw;
     }
     @media (max-width: 640px) { .img-pair { grid-template-columns: 1fr; } }
     .img-pair img { width: 100%; height: auto; display: block; }
@@ -245,7 +261,7 @@
     .cs--no-border { border-top: none; }
 
     /* ─── OTHER PROJECTS ──────────────────────────────────────── */
-    .other { padding: clamp(80px, 8vw, 120px) var(--pad-x); border-top: 1px solid var(--ink-20); }
+    .other { padding: clamp(80px, 8vw, 120px) var(--pad-x); }
     .other__label {
       font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
       text-transform: uppercase; color: var(--ink-60); margin-bottom: 32px;
@@ -291,7 +307,6 @@
     /* ─── FOOTER ──────────────────────────────────────────────── */
     .footer {
       padding: clamp(80px, 8vw, 120px) var(--pad-x) clamp(120px, 14vw, 200px);
-      border-top: 1px solid var(--ink-20);
       display: flex; flex-direction: column; gap: clamp(24px, 3vw, 40px);
     }
     .footer__connect {
@@ -333,19 +348,16 @@
   </div>
 
   <div class="hero__inner">
-    <a class="hero__back" href="index.html#projects">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-        <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
-      </svg>
-      Back to work
-    </a>
+    <div class="hero__sponsor reveal">
+      <img class="hero__sponsor-logo" src="giraco_logo.png" alt="Giraco">
+      <span class="hero__sponsor-text">– freelance project</span>
+    </div>
+    <p class="hero__subtitle">An e-commerce project focused on premium-quality wardrobe essentials. The goal of this project was to design a seamless, elevated shopping experience that matches the brand's dedication to quality and style.</p>
     <div class="hero__pills">
       <span class="hero__pill hero__pill--accent">E-Commerce &amp; UI Design</span>
       <span class="hero__pill hero__pill--outline">Fashion</span>
       <span class="hero__pill hero__pill--outline">2024</span>
     </div>
-    <h1 class="hero__title">GIRACO</h1>
-    <p class="hero__subtitle">An e-commerce project focused on premium-quality wardrobe essentials. The goal of this project was to design a seamless, elevated shopping experience that matches the brand's dedication to quality and style.</p>
   </div>
 
   <div class="hero__image reveal">
@@ -377,10 +389,31 @@
 
 <!-- ── THE CONCEPT ─────────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">THE CONCEPT</h2>
-  <p class="cs__body reveal reveal-d1">An e-commerce project focused on premium-quality wardrobe essentials. The goal of this project was to design a seamless, elevated shopping experience that matches the brand's dedication to quality and style.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">THE CONCEPT</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">Giraco is a fashion label built around <strong>timeless, premium-quality wardrobe essentials</strong> — pieces designed to last beyond seasonal trends. The concept behind this project was to translate that same sense of quality and intentionality into the digital shopping experience, creating an online store that feels <strong>as considered and elevated as the garments themselves</strong>.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images reveal">
     <img class="img-full" src="Giraco_Image 7.png" alt="Giraco — concept overview">
+  </div>
+</section>
+
+<!-- ── THE EXPERIENCE ──────────────────────────────────────────── -->
+<section class="cs">
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">THE EXPERIENCE</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">Every touchpoint was designed to reflect the premium nature of the brand — from browsing and filtering products to <strong>a streamlined checkout that reduces friction and encourages conversion</strong>. Product pages were built to highlight craftsmanship and material quality through clean, image-forward layouts, while intuitive filtering helped customers move quickly from discovery to decision. Particular attention was paid to the checkout flow, <strong>removing unnecessary steps and surfacing trust signals at the right moments</strong>, so the path to purchase felt as effortless as the shopping experience that led to it.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cs__images reveal">
+    <img class="img-full" src="Giraco_Image 4.png" alt="Giraco — shopping experience screens">
   </div>
 </section>
 
@@ -400,15 +433,6 @@
   </div>
 </section>
 
-<!-- ── THE EXPERIENCE ──────────────────────────────────────────── -->
-<section class="cs">
-  <h2 class="cs__heading reveal">THE EXPERIENCE</h2>
-  <p class="cs__body reveal reveal-d1">Every touchpoint was designed to reflect the premium nature of the brand — from browsing and filtering products to a streamlined checkout that reduces friction and encourages conversion.</p>
-  <div class="cs__images reveal">
-    <img class="img-full" src="Giraco_Image 4.png" alt="Giraco — shopping experience screens">
-  </div>
-</section>
-
 <!-- ── EDITORIAL: breathing room left, image right ─────────────── -->
 <section class="cs cs--no-border">
   <div class="img-pair reveal">
@@ -419,7 +443,7 @@
 
 <!-- ── FINAL SCREENS ───────────────────────────────────────────── -->
 <section class="cs cs--no-border">
-  <div class="reveal">
+  <div class="reveal" style="width: 100vw; position: relative; left: 50%; margin-left: -50vw;">
     <img class="img-full" src="Giraco_Image 8.png" alt="Giraco — final platform screens">
   </div>
 </section>

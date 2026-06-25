@@ -155,42 +155,42 @@
       padding-bottom: 0;
     }
     .hero__inner {
-      padding: 0 var(--pad-x) clamp(48px, 6vw, 80px);
-      display: flex; flex-direction: column; gap: 24px;
+      padding: 0 var(--pad-x);
+      display: flex; flex-direction: column; align-items: center;
     }
-    .hero__back {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--ink-60);
-      transition: color .2s; width: fit-content;
+    .hero__sponsor {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 10px;
+      margin-top: clamp(120px, 18vh, 240px);
     }
-    .hero__back:hover { color: var(--ink); }
-    .hero__back svg { width: 14px; height: 14px; flex-shrink: 0; }
-    .hero__pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hero__sponsor-logo { height: clamp(18px, 1.6vw, 24px); width: auto; display: block; }
+    .hero__sponsor-text {
+      font-family: var(--title); font-size: clamp(16px, 1.4vw, 21px);
+      color: var(--ink-60); letter-spacing: -0.01em;
+    }
+    .hero__subtitle {
+      font-family: var(--title); font-size: 18px; font-weight: 700;
+      color: var(--ink); line-height: 1.6; letter-spacing: -0.01em;
+      text-align: center; max-width: 480px;
+      margin: clamp(16px, 2vw, 24px) auto 0;
+    }
+    .hero__pills {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+      margin-top: clamp(16px, 2vw, 24px);
+      margin-bottom: clamp(100px, 12vw, 160px);
+    }
     .hero__pill {
       font-family: var(--mono); font-size: 10px; letter-spacing: .06em;
       text-transform: uppercase; padding: 6px 14px; border-radius: 999px;
     }
-    .hero__pill--accent { background: var(--accent); color: var(--ink); font-weight: 600; }
+    .hero__pill--accent { border: 1px solid var(--ink-20); color: var(--ink-60); }
     .hero__pill--outline { border: 1px solid var(--ink-20); color: var(--ink-60); }
-    .hero__title {
-      font-family: var(--display); font-weight: 900;
-      font-size: clamp(88px, 16vw, 220px);
-      line-height: .86; letter-spacing: -0.03em;
-      text-transform: uppercase; color: var(--ink);
-    }
-    .hero__subtitle {
-      font-family: var(--title); font-size: clamp(16px, 1.5vw, 22px);
-      color: var(--ink-60); line-height: 1.6;
-      max-width: 560px; letter-spacing: -0.01em;
-    }
-    .hero__image { padding: 0 var(--pad-x); }
+    .hero__image { padding: 0; }
     .hero__image img { width: 100%; height: auto; display: block; }
 
     /* ─── INFO STRIP ──────────────────────────────────────────── */
     .info-strip {
       padding: clamp(48px, 5vw, 72px) var(--pad-x);
-      border-top: 1px solid var(--ink-20);
     }
     .info-grid {
       display: grid; grid-template-columns: repeat(4, 1fr);
@@ -213,41 +213,62 @@
     /* ─── CONTENT SECTIONS ────────────────────────────────────── */
     .cs {
       padding: clamp(80px, 8vw, 120px) var(--pad-x);
-      border-top: 1px solid var(--ink-20);
+    }
+    .cs__layout {
+      display: grid;
+      grid-template-columns: minmax(120px, 18%) minmax(0, 780px);
+      gap: clamp(16px, 2vw, 32px);
+      align-items: start;
     }
     .cs__heading {
-      font-family: var(--display); font-weight: 900;
-      font-size: clamp(36px, 5vw, 72px);
-      line-height: .9; letter-spacing: -0.025em; text-transform: uppercase;
-      color: var(--ink); margin-bottom: clamp(24px, 3vw, 40px);
+      font-family: var(--title); font-weight: 500;
+      font-size: clamp(13px, 1vw, 14px);
+      line-height: 1.5; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--ink);
     }
+    .cs__content { display: flex; flex-direction: column; align-items: center; }
+    .cs__text { padding: 0 clamp(16px, 4vw, 56px); max-width: 720px; }
     .cs__body {
       font-family: var(--title); font-size: clamp(15px, 1.2vw, 18px);
       line-height: 1.75; color: var(--ink-60);
-      max-width: 720px; letter-spacing: -0.01em;
+      letter-spacing: -0.01em;
     }
     .cs__body strong { font-weight: 600; color: var(--ink); }
     .cs__body + .cs__body { margin-top: 24px; }
-    .cs__images { margin-top: clamp(48px, 6vw, 80px); }
+    .cs__images {
+      width: 100vw; position: relative; left: 50%; margin-left: -50vw;
+      margin-top: clamp(160px, 16vw, 240px);
+    }
+    @media (max-width: 800px) {
+      .cs__layout { grid-template-columns: 1fr; gap: 0; }
+      .cs__heading { margin-bottom: clamp(16px, 4vw, 24px); }
+      .cs__text { padding: 0; max-width: none; }
+    }
 
     .img-full { width: 100%; height: auto; display: block; }
 
     .img-pair {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(16px, 2vw, 32px);
+      gap: clamp(16px, 2vw, 24px);
+      aspect-ratio: 21 / 9;
     }
-    @media (max-width: 640px) { .img-pair { grid-template-columns: 1fr; } }
-    .img-pair img { width: 100%; height: auto; display: block; }
+    .img-pair img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .img-pair > *:first-child { border-radius: 0 16px 16px 0; }
+    .img-pair > *:last-child { border-radius: 16px 0 0 16px; }
+    @media (max-width: 640px) {
+      .img-pair { grid-template-columns: 1fr; aspect-ratio: auto; }
+      .img-pair img { height: auto; }
+      .img-pair > *:first-child { border-radius: 0 0 16px 16px; }
+      .img-pair > *:last-child { border-radius: 16px 16px 0 0; }
+    }
 
     /* ─── PROCESS PHASES ──────────────────────────────────────── */
-    .phases { margin-top: clamp(32px, 4vw, 48px); }
+    .phases { margin-top: 0; }
     .phase {
-      padding: clamp(24px, 3vw, 36px) 0;
-      border-top: 1px solid var(--ink-20);
+      padding: clamp(16px, 2vw, 20px) 0;
       display: grid; grid-template-columns: 48px 1fr;
       gap: 24px; align-items: start;
     }
-    .phase:last-child { border-bottom: 1px solid var(--ink-20); }
     .phase__num {
       font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
       color: var(--ink-60); padding-top: 4px;
@@ -263,7 +284,7 @@
     }
 
     /* ─── OTHER PROJECTS ──────────────────────────────────────── */
-    .other { padding: clamp(80px, 8vw, 120px) var(--pad-x); border-top: 1px solid var(--ink-20); }
+    .other { padding: clamp(80px, 8vw, 120px) var(--pad-x); }
     .other__label {
       font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
       text-transform: uppercase; color: var(--ink-60); margin-bottom: 32px;
@@ -309,7 +330,6 @@
     /* ─── FOOTER ──────────────────────────────────────────────── */
     .footer {
       padding: clamp(80px, 8vw, 120px) var(--pad-x) clamp(120px, 14vw, 200px);
-      border-top: 1px solid var(--ink-20);
       display: flex; flex-direction: column; gap: clamp(24px, 3vw, 40px);
     }
     .footer__connect {
@@ -351,19 +371,16 @@
   </div>
 
   <div class="hero__inner">
-    <a class="hero__back" href="index.html#projects">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-        <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
-      </svg>
-      Back to work
-    </a>
+    <div class="hero__sponsor reveal">
+      <img class="hero__sponsor-logo" src="maywey_logo.png" alt="Maiwey">
+      <span class="hero__sponsor-text">– in collaboration with Designit</span>
+    </div>
+    <p class="hero__subtitle">End-to-end investment web app and desktop platform for a private bank, allowing clients to browse and purchase investment funds.</p>
     <div class="hero__pills">
       <span class="hero__pill hero__pill--accent">Product Research &amp; User Experience</span>
       <span class="hero__pill hero__pill--outline">Fintech</span>
       <span class="hero__pill hero__pill--outline">2024</span>
     </div>
-    <h1 class="hero__title">MAIWEY</h1>
-    <p class="hero__subtitle">End-to-end investment web app and desktop platform for a private bank, allowing clients to browse and purchase investment funds.</p>
   </div>
 
   <div class="hero__image reveal">
@@ -395,11 +412,18 @@
 
 <!-- ── REGISTRATION & LEGAL COMPLIANCE ────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">REGISTRATION AND<br>LEGAL COMPLIANCE</h2>
-  <p class="cs__body reveal reveal-d1">One of the major challenges was the registration process. Due to legal requirements, users had to go through a lengthy onboarding process, including identity verification, document uploads, and regulatory compliance checks. This process could be overwhelming and caused frustration for new users. To address this, we:</p>
-  <p class="cs__body reveal reveal-d2">Broke the registration process into manageable steps, providing clear explanations for why certain information was required. Added a progress indicator so users could see how far along they were in the process. Used tooltips and real-time feedback to guide users through form fields, ensuring the process felt smoother and less daunting. Streamlined document submission by allowing users to upload and verify documents directly within the app.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">REGISTRATION AND LEGAL COMPLIANCE</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">One of the major challenges was the registration process. Due to legal requirements, users had to go through a lengthy onboarding process, including <strong>identity verification, document uploads, and regulatory compliance checks</strong>. This process could be overwhelming and caused frustration for new users. To address this, we:</p>
+        <p class="cs__body reveal reveal-d2">Broke the registration process into manageable steps, providing clear explanations for why certain information was required. Added a progress indicator so users could see how far along they were in the process. Used tooltips and real-time feedback to guide users through form fields, ensuring the process felt smoother and less daunting. Streamlined document submission by allowing users to <strong>upload and verify documents directly within the app</strong>.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images">
-    <div class="img-pair reveal">
+    <img class="img-full reveal" src="maiwey_Image11.png" alt="Maiwey — brand identity and applications">
+    <div class="img-pair reveal" style="margin-top: clamp(48px, 6vw, 80px);">
       <img src="Maiwey_Image 2.png" alt="Maiwey — registration flow">
       <img src="Maiwey_Image 3.png" alt="Maiwey — legal compliance screens">
     </div>
@@ -408,18 +432,31 @@
 
 <!-- ── SIMPLIFYING FINANCIAL PRODUCTS ─────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">SIMPLIFYING<br>FINANCIAL PRODUCTS</h2>
-  <p class="cs__body reveal reveal-d1">Another challenge was simplifying complex financial products for users unfamiliar with investment terminology. Investment funds come with variables such as performance history, risk levels, and fees, which can be confusing for the average user. We addressed this by:</p>
-  <p class="cs__body reveal reveal-d2">Simplifying language across the app and using everyday terms to explain investment concepts. Visualizing data with easy-to-understand graphs, charts, and risk indicators that helped users compare funds quickly. Collaborating with financial advisors to ensure that the content remained accurate and compliant while being user-friendly.</p>
-  <div class="cs__images reveal">
-    <img class="img-full" src="Maiwey_Image 4.png" alt="Maiwey — investment product visualisation">
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">SIMPLIFYING FINANCIAL PRODUCTS</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">Another challenge was simplifying complex financial products for users unfamiliar with investment terminology. Investment funds come with variables such as <strong>performance history, risk levels, and fees</strong>, which can be confusing for the average user. We addressed this by:</p>
+        <p class="cs__body reveal reveal-d2">Simplifying language across the app and using everyday terms to explain investment concepts. Visualizing data with <strong>easy-to-understand graphs, charts, and risk indicators</strong> that helped users compare funds quickly. Collaborating with financial advisors to ensure that the content remained accurate and compliant while being user-friendly.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cs__images">
+    <img class="img-full reveal" src="maiwey_Image 9.png" alt="Maiwey — social and marketing content templates">
+    <img class="img-full reveal" src="Maiwey_Image 4.png" alt="Maiwey — investment product visualisation" style="margin-top: clamp(48px, 6vw, 80px);">
   </div>
 </section>
 
 <!-- ── STAKEHOLDER ALIGNMENT ──────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">STAKEHOLDER ALIGNMENT</h2>
-  <p class="cs__body reveal reveal-d1">With multiple stakeholders — from marketing and legal to compliance and business teams — it was challenging to balance their varying priorities. To manage this, we held regular meetings to ensure that the design met all legal, regulatory, and business needs without compromising the user experience.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">STAKEHOLDER ALIGNMENT</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <p class="cs__body reveal reveal-d1">With multiple stakeholders — from marketing and legal to compliance and business teams — it was challenging to balance their varying priorities. To manage this, we held regular meetings to ensure that the design met all legal, regulatory, and business needs <strong>without compromising the user experience</strong>.</p>
+      </div>
+    </div>
+  </div>
   <div class="cs__images">
     <div class="img-pair reveal">
       <img src="Maiwey_Image 5.png" alt="Maiwey — stakeholder sessions">
@@ -430,41 +467,48 @@
 
 <!-- ── THE PROCESS ─────────────────────────────────────────────── -->
 <section class="cs">
-  <h2 class="cs__heading reveal">THE PROCESS</h2>
-
-  <div class="phases">
-    <div class="phase reveal">
-      <div class="phase__num">01</div>
-      <div>
-        <div class="phase__name">Research and Discovery</div>
-        <p class="phase__desc">We began with extensive user research to understand the needs and behaviors of potential investors. This included client interviews, surveys, and competitor analysis. We also worked closely with the bank's financial advisors to understand investment product offerings and legal requirements. Simultaneously, we conducted branding workshops to define the bank's identity and ensure the logo and visual design reflected its premium image.</p>
-      </div>
-    </div>
-    <div class="phase reveal reveal-d1">
-      <div class="phase__num">02</div>
-      <div>
-        <div class="phase__name">Branding and Logo Design</div>
-        <p class="phase__desc">The bank's identity was built around trust, security, and sophistication. We designed a minimalist yet elegant logo that symbolized growth and stability, aligning with the bank's values. The color palette was a combination of deep blues and golds to represent wealth and professionalism, with clean typography for a modern, accessible feel.</p>
-      </div>
-    </div>
-    <div class="phase reveal reveal-d2">
-      <div class="phase__num">03</div>
-      <div>
-        <div class="phase__name">Designing the Web App</div>
-        <p class="phase__desc">We mapped out the user journey from logging in, exploring investment options, to purchasing funds. Special care was taken to simplify the process and remove any unnecessary friction. A clean, premium design helped make complex financial data more approachable. Fund performance, risk levels, and fees were presented in simplified formats using interactive graphs and visual indicators.</p>
-      </div>
-    </div>
-    <div class="phase reveal reveal-d3">
-      <div class="phase__num">04</div>
-      <div>
-        <div class="phase__name">Designing the Private Website</div>
-        <p class="phase__desc">The private website complemented the app, offering a detailed dashboard for clients to track their investments, view personalized reports, and access exclusive financial content. The design remained consistent with the app, ensuring a cohesive user experience across platforms.</p>
+  <div class="cs__layout">
+    <h2 class="cs__heading reveal">THE PROCESS</h2>
+    <div class="cs__content">
+      <div class="cs__text">
+        <div class="phases">
+          <div class="phase reveal">
+            <div class="phase__num">01</div>
+            <div>
+              <div class="phase__name">Research and Discovery</div>
+              <p class="phase__desc">We began with extensive user research to understand the needs and behaviors of potential investors. This included client interviews, surveys, and competitor analysis. We also worked closely with the bank's financial advisors to understand investment product offerings and legal requirements. Simultaneously, we conducted branding workshops to define the bank's identity and ensure the logo and visual design reflected its premium image.</p>
+            </div>
+          </div>
+          <div class="phase reveal reveal-d1">
+            <div class="phase__num">02</div>
+            <div>
+              <div class="phase__name">Branding and Logo Design</div>
+              <p class="phase__desc">The bank's identity was built around trust, security, and sophistication. We designed a minimalist yet elegant logo that symbolized growth and stability, aligning with the bank's values. The color palette was a combination of deep blues and golds to represent wealth and professionalism, with clean typography for a modern, accessible feel.</p>
+            </div>
+          </div>
+          <div class="phase reveal reveal-d2">
+            <div class="phase__num">03</div>
+            <div>
+              <div class="phase__name">Designing the Web App</div>
+              <p class="phase__desc">We mapped out the user journey from logging in, exploring investment options, to purchasing funds. Special care was taken to simplify the process and remove any unnecessary friction. A clean, premium design helped make complex financial data more approachable. Fund performance, risk levels, and fees were presented in simplified formats using interactive graphs and visual indicators.</p>
+            </div>
+          </div>
+          <div class="phase reveal reveal-d3">
+            <div class="phase__num">04</div>
+            <div>
+              <div class="phase__name">Designing the Private Website</div>
+              <p class="phase__desc">The private website complemented the app, offering a detailed dashboard for clients to track their investments, view personalized reports, and access exclusive financial content. The design remained consistent with the app, ensuring a cohesive user experience across platforms.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="cs__images reveal">
-    <img class="img-full" src="Maiwey_Image 7.png" alt="Maiwey — final platform screens">
+  <div class="cs__images">
+    <img class="img-full reveal" src="maiwey_Image 8.png" alt="Maiwey — deposit contracting flow across mobile and desktop">
+    <img class="img-full reveal" src="Maiwey_Image 7.png" alt="Maiwey — final platform screens" style="margin-top: clamp(48px, 6vw, 80px);">
+    <img class="img-full reveal" src="maiwey_Image10.png" alt="Maiwey — investment dashboard across devices" style="margin-top: clamp(48px, 6vw, 80px);">
   </div>
 </section>
 
