@@ -218,7 +218,8 @@
     /* ─── SHARED SECTION ──────────────────────────────────────── */
     .section { padding: clamp(64px, 8vw, 120px) clamp(20px, 2.5vw, 40px); }
     .section-eyebrow {
-      font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
+      font-family: "Figtree", sans-serif; font-weight: 500;
+      font-size: clamp(13px, 1vw, 14px); line-height: 1.5; letter-spacing: .08em;
       text-transform: uppercase; color: var(--ink-60); margin-bottom: 14px;
     }
     .section-title {
@@ -276,15 +277,38 @@
     }
 
     /* ─── ABOUT SECTION ───────────────────────────────────────── */
-    #about { background: var(--bg); padding: clamp(64px, 8vw, 120px) clamp(20px, 2.5vw, 40px); }
-    .about-layout { display: grid; grid-template-columns: 1fr 380px; gap: 48px; align-items: end; }
-    .about-text { font-family: var(--title); font-weight: 500; font-size: 60px; line-height: 1.2; text-align: left; color: var(--ink); opacity: 0; transform: translateY(32px); transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1); }
-    .about-text.visible { opacity: 1; transform: none; }
-    .about-word { display: inline-block; }
-    .about-photo-wrap { width: 100%; height: 500px; overflow: hidden; border-radius: 20px; opacity: 0; transform: translateY(40px) rotate(-3deg); transition: opacity .9s cubic-bezier(.2,.8,.2,1) .15s, transform .9s cubic-bezier(.2,.8,.2,1) .15s; }
-    .about-photo-wrap.visible { opacity: 1; transform: rotate(-3deg); }
-    .about-photo-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-    @media (max-width: 700px) { .about-layout { grid-template-columns: 1fr; } .about-photo-wrap { display: none; } .about-text { font-size: 32px; } }
+    .about-me {
+      position: relative;
+      padding-top: clamp(120px, 14vw, 200px);
+      padding-bottom: clamp(120px, 14vw, 200px);
+    }
+    .about-me__inner { max-width: 630px; margin: 0 auto; text-align: left; }
+    .about-me__text {
+      font-family: "Figtree", sans-serif; font-weight: 400;
+      font-size: 24px; line-height: 1.5; color: var(--ink);
+    }
+    .about-me__text p { margin-bottom: 32px; }
+    .about-me__text p:last-child { margin-bottom: 0; }
+
+    /* ── Mouse-trail effect (About Me only — see index.html's closing
+       script block for the cursor logic). Scoped to ".about-me
+       .section-eyebrow" rather than the bare ".section-eyebrow" so this
+       doesn't add position/z-index to that shared class's other two
+       usages ("Selected Work…", "How I work") elsewhere on the page. */
+    .about-me__trail {
+      position: absolute; inset: 0;
+      pointer-events: none; overflow: hidden; z-index: 3;
+    }
+    .about-me__text, .about-me .section-eyebrow { position: relative; z-index: 2; }
+    .about-me__trail-img {
+      position: absolute;
+      width: 160px; height: 200px;
+      object-fit: cover;
+      opacity: 0;
+      border-radius: 4px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      will-change: transform, opacity;
+    }
 
     /* ─── STACK SECTION ───────────────────────────────────────── */
     .stack-grid {
@@ -378,6 +402,55 @@
     #view-cursor.active {
       opacity: 1; transform: translate(-50%, -50%) scale(1);
     }
+
+    /* ─── CIRCULAR ROTATING CURSOR BADGE (SCROLL / MOVE ME) ──
+       One shared template (see buildBadge() in main.js) — size comes from
+       each instance's own inline width/height, everything else (glass,
+       color, font, star) is identical between variants. */
+    body.custom-cursor-active { cursor: none; }
+    /* Restore the native pointer over clickable elements — the badge
+       cursor hides itself here (see updateCursorState in main.js), so the
+       system cursor needs to be visible again instead of staying none.
+       .work-card is excluded: it keeps its own cursor:none + "View" badge. */
+    body.custom-cursor-active a:not(.work-card),
+    body.custom-cursor-active button,
+    body.custom-cursor-active [role="button"] {
+      cursor: pointer;
+    }
+    .badge-cursor {
+      position: fixed; left: 0; top: 0;
+      pointer-events: none; z-index: 10000;
+      opacity: 0; transform: translate(-50%, -50%) scale(0.85);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .badge-cursor.active { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    .cursor-badge__glass {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.10);
+      pointer-events: none;
+      transition: background 0.2s ease;
+    }
+    .badge-cursor--dark-ctx .cursor-badge__glass { background: rgba(0, 0, 0, 0.15); }
+    .badge-cursor__spin {
+      width: 100%; height: 100%;
+      animation: badgeSpin 10s linear infinite;
+    }
+    .badge-cursor__spin svg { display: block; width: 100%; height: 100%; }
+    .badge-cursor__text, .badge-cursor__star {
+      fill: var(--ink-60);
+      transition: fill 0.2s ease;
+    }
+    .badge-cursor--dark-ctx .badge-cursor__text,
+    .badge-cursor--dark-ctx .badge-cursor__star { fill: rgba(255, 255, 255, 0.75); }
+    .badge-cursor__text {
+      font-family: "Figtree", sans-serif; font-weight: 500;
+      text-transform: uppercase;
+    }
+    @keyframes badgeSpin { to { transform: rotate(360deg); } }
 
     /* ─── SERVICES SECTION ───────────────────────────────────────── */
     .services-section {

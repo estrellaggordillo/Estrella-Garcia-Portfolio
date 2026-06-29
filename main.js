@@ -4,15 +4,157 @@
   var cursor = document.getElementById('view-cursor');
   var cards  = document.querySelectorAll('.work-card');
 
+  // ── Circular rotating badge cursor (SCROLL / MOVE ME) ──
+  // Reuses the document mousemove tracker and the cards' mouseenter/
+  // mouseleave below instead of adding a second listener of either kind.
+  // Both badges are built from the same buildBadge() template and share
+  // one fixed circle radius — only their text, font-size/weight, and
+  // letter-spacing (to balance the gap before each star) differ.
+  var hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+  var badgeScroll, badgeAbout, aboutSection;
+  var hoveringCard = false, insideAbout = false, hoveringClickable = false;
+  var BADGE_RADIUS = 27; // shared, fixed circle radius for both badges
+  var BADGE_PAD = 17; // margin from text-path radius to badge edge
+  // Generic interactive elements the badge cursor shouldn't sit on top of
+  // (the .work-card link is excluded on purpose — it gets its own "View"
+  // cursor treatment via hoveringCard below, which takes priority).
+  var CLICKABLE_SELECTOR = 'a, button, [role="button"], [onclick], .bottom-nav__burger';
+
+  function buildBadge(id, text, fontSize, letterSpacingEm, fontWeight) {
+    var radius = BADGE_RADIUS;
+    var size = (radius + BADGE_PAD) * 2;
+    var cx = size / 2, cy = size / 2;
+    var pathId = id + '-path';
+    var d = 'M ' + cx + ' ' + (cy - radius) +
+      ' A ' + radius + ' ' + radius + ' 0 1 1 ' + cx + ' ' + (cy + radius) +
+      ' A ' + radius + ' ' + radius + ' 0 1 1 ' + cx + ' ' + (cy - radius);
+
+    function textPiece(offsetPct) {
+      var style = 'font-size:' + fontSize + 'px' +
+        (letterSpacingEm ? ';letter-spacing:' + letterSpacingEm + 'em' : '') +
+        (fontWeight ? ';font-weight:' + fontWeight : '');
+      return '<text class="badge-cursor__text" style="' + style + '" text-anchor="middle">' +
+          '<textPath href="#' + pathId + '" xlink:href="#' + pathId + '" startOffset="' + offsetPct + '%">' + text + '</textPath>' +
+        '</text>';
+    }
+
+    // Drawn as an explicit path instead of a "✦" glyph — at this size
+    // some fonts fall back to a missing-glyph box inside SVG <textPath>,
+    // so a real shape guarantees a crisp 4-point star everywhere.
+    function starPiece(offsetPct) {
+      var theta = (offsetPct / 100) * 360;
+      var rad = theta * Math.PI / 180;
+      var x = cx + radius * Math.sin(rad);
+      var y = cy - radius * Math.cos(rad);
+      return '<path class="badge-cursor__star" ' +
+        'transform="translate(' + x.toFixed(2) + ',' + y.toFixed(2) + ') rotate(' + theta.toFixed(2) + ')" ' +
+        'd="M 0,-4.2 L 0.8,-0.8 L 4.2,0 L 0.8,0.8 L 0,4.2 L -0.8,0.8 L -4.2,0 L -0.8,-0.8 Z"></path>';
+    }
+
+    var el = document.createElement('div');
+    el.id = id;
+    el.className = 'badge-cursor';
+    el.style.width = size + 'px';
+    el.style.height = size + 'px';
+    el.innerHTML =
+      '<div class="cursor-badge__glass"></div>' +
+      '<div class="badge-cursor__spin">' +
+        '<svg viewBox="0 0 ' + size + ' ' + size + '">' +
+          '<path id="' + pathId + '" fill="none" d="' + d + '"></path>' +
+          // Offsets are shifted off 0%/25%/50%/75% by +20% so that text
+          // centered via text-anchor:middle never needs to extend backward
+          // past the path's literal start (0%) — a smaller +12.5% margin
+          // silently dropped leading characters for longer badge text.
+          textPiece(20) +
+          starPiece(45) +
+          textPiece(70) +
+          starPiece(95) +
+        '</svg>' +
+      '</div>';
+    return el;
+  }
+
+  if (hasFinePointer) {
+    document.body.classList.add('custom-cursor-active');
+    badgeScroll = buildBadge('badge-cursor-scroll', 'SCROLL', 9.5, 0.15);
+    badgeAbout  = buildBadge('badge-cursor-about', 'MOVE ME', 10.5, 0, 600);
+    document.body.appendChild(badgeScroll);
+    document.body.appendChild(badgeAbout);
+    aboutSection = document.querySelector('.about-me');
+  }
+
+  // SCROLL is the default state from the moment the page loads.
+  updateCursorState();
+
+  function updateCursorState() {
+    if (!hasFinePointer) return;
+    if (hoveringCard) {
+      cursor.classList.add('active');
+      badgeScroll.classList.remove('active');
+      badgeAbout.classList.remove('active');
+    } else if (hoveringClickable) {
+      // Over a link/button/etc: hide both badges entirely so the element
+      // and the native (now-restored, see CSS) pointer cursor are clear.
+      cursor.classList.remove('active');
+      badgeScroll.classList.remove('active');
+      badgeAbout.classList.remove('active');
+    } else if (insideAbout) {
+      cursor.classList.remove('active');
+      badgeAbout.classList.add('active');
+      badgeScroll.classList.remove('active');
+    } else {
+      cursor.classList.remove('active');
+      badgeScroll.classList.add('active');
+      badgeAbout.classList.remove('active');
+    }
+  }
+
   document.addEventListener('mousemove', function (e) {
     cursor.style.left = e.clientX + 'px';
     cursor.style.top  = e.clientY + 'px';
+    if (hasFinePointer) {
+      badgeScroll.style.left = e.clientX + 'px';
+      badgeScroll.style.top  = e.clientY + 'px';
+      badgeAbout.style.left  = e.clientX + 'px';
+      badgeAbout.style.top   = e.clientY + 'px';
+
+      // This page's own dark sections (bottom nav, footer, ticker, etc. —
+      // not the visitor's OS theme) are marked with data-cursor-theme,
+      // so the badge can switch to its light-on-dark color over them.
+      var isDark = !!(e.target && e.target.closest && e.target.closest('[data-cursor-theme="dark"]'));
+      badgeScroll.classList.toggle('badge-cursor--dark-ctx', isDark);
+      badgeAbout.classList.toggle('badge-cursor--dark-ctx', isDark);
+
+      // Don't let the badge sit on top of links/buttons/etc. and hide
+      // what's about to be clicked.
+      var isClickable = !!(e.target && e.target.closest && e.target.closest(CLICKABLE_SELECTOR));
+      if (isClickable !== hoveringClickable) {
+        hoveringClickable = isClickable;
+        updateCursorState();
+      }
+    }
   });
 
   cards.forEach(function (card) {
-    card.addEventListener('mouseenter', function () { cursor.classList.add('active'); });
-    card.addEventListener('mouseleave', function () { cursor.classList.remove('active'); });
+    card.addEventListener('mouseenter', function () {
+      cursor.classList.add('active');
+      hoveringCard = true;
+      updateCursorState();
+    });
+    card.addEventListener('mouseleave', function () {
+      cursor.classList.remove('active');
+      hoveringCard = false;
+      updateCursorState();
+    });
   });
+
+  // About Me section uses the same direct-element-listener boundary
+  // detection as the mouse-trail effect (see index.html) rather than
+  // recomputing getBoundingClientRect on every global mousemove.
+  if (hasFinePointer && aboutSection) {
+    aboutSection.addEventListener('mouseenter', function () { insideAbout = true; updateCursorState(); });
+    aboutSection.addEventListener('mouseleave', function () { insideAbout = false; updateCursorState(); });
+  }
 
   // ── Stop video and kill scroll animation before navigating ────
   cards.forEach(function (card) {
@@ -215,24 +357,6 @@
     hero.addEventListener('mouseleave', function () {
       gsap.to(wrap, { x: 0, y: 0, duration: 0.8, ease: 'power2.out' });
     });
-  }
-
-  // ── ABOUT SECTION ─────────────────────────────────────────
-  var aboutText = document.querySelector('.about-text');
-  var aboutPhoto = document.querySelector('.about-photo-wrap');
-  if (aboutText) {
-    new IntersectionObserver(function(entries, obs) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-      });
-    }, { threshold: 0.1 }).observe(aboutText);
-  }
-  if (aboutPhoto) {
-    new IntersectionObserver(function(entries, obs) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-      });
-    }, { threshold: 0.1 }).observe(aboutPhoto);
   }
 
 })();

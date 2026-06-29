@@ -13,7 +13,7 @@
 <body>
 
 <!-- ── FLOATING CTA ──────────────────────────────────────────── -->
-<a class="cta-fixed" href="mailto:estrellaggordillo93@gmail.com">Get in touch</a>
+<a class="cta-fixed" href="mailto:estrellaggordillo93@gmail.com" data-cursor-theme="dark">Get in touch</a>
 
 <!-- ── TOP BAR ───────────────────────────────────────────────── -->
 <div class="top-bar">
@@ -34,7 +34,7 @@
 <!-- ── HERO ──────────────────────────────────────────────────── -->
 <div class="hero">
   <div class="hero__video-wrap">
-    <div class="hero__video-frame" id="heroFrame">
+    <div class="hero__video-frame" id="heroFrame" data-cursor-theme="dark">
       <video class="hero__video" id="heroVideo" autoplay loop muted playsinline>
         <source src="landing.mp4" type="video/mp4">
       </video>
@@ -51,7 +51,7 @@
 </div>
 
 <!-- ── FLOATING BOTTOM NAV ────────────────────────────────────── -->
-<div class="bottom-nav-wrap">
+<div class="bottom-nav-wrap" data-cursor-theme="dark">
   <div class="bottom-nav">
     <div class="bottom-nav__avatar">
       <img src="profile_pic.png" alt="Estrella García">
@@ -86,7 +86,7 @@
 </div>
 
 <!-- ── TICKER STRIP ────────────────────────────────────────────── -->
-<div class="ticker-strip">
+<div class="ticker-strip" data-cursor-theme="dark">
   <div class="ticker-track">
     <div class="ticker-item">
       <span>UX / UI Design</span><div class="ticker-dot"></div>
@@ -190,12 +190,13 @@
 </section>
 
 <!-- ── ABOUT ──────────────────────────────────────────────────── -->
-<section id="about" class="section">
-  <div class="section-eyebrow">About me</div>
-  <div class="about-layout">
-    <p class="about-text">Passionate about bridging strategy and craft. I turn complex problems into products people actually love. With 8+ years across fintech, healthcare and e-commerce. I help forward-thinking teams build experiences that feel as good as they work.</p>
-    <div class="about-photo-wrap">
-      <img src="about me_pic.png" alt="Estrella García" class="about-photo-img">
+<section id="about" class="section about-me">
+  <div class="about-me__trail" aria-hidden="true"></div>
+  <div class="about-me__inner">
+    <div class="section-eyebrow">About me</div>
+    <div class="about-me__text">
+      <p>I'm Estrella García, passionate about bridging strategy and craft. I turn complex problems into products people actually love.</p>
+      <p>With 8+ years across fintech, healthcare and <span style="white-space:nowrap;">e-commerce.</span> I help forward-thinking teams build experiences that feel as good as they work.</p>
     </div>
   </div>
 </section>
@@ -203,7 +204,7 @@
 <!-- ── SERVICES ──────────────────────────────────────────────── -->
 <section class="services-section">
 
-  <div class="services-wrapper">
+  <div class="services-wrapper" data-cursor-theme="dark">
 
   <div class="services-intro">
     <span class="services-intro__star"><img src="star.png" alt="" id="svcStar" style="display:block;height:40px;width:auto;object-fit:contain;margin-top:4px;"></span>
@@ -276,7 +277,7 @@
   <div class="section-header reveal">
     <div>
       <div class="section-eyebrow">How I work</div>
-      <h2 class="section-title">TOOLS &amp;<br>METHODS</h2>
+      <h2 class="section-title">TOOLS &amp; METHODS</h2>
     </div>
   </div>
 
@@ -325,7 +326,7 @@
 </section>
 
 <!-- ── CONTACT ─────────────────────────────────────────────────── -->
-<section id="contact" class="contact">
+<section id="contact" class="contact" data-cursor-theme="dark">
   <h2 class="contact__heading reveal">
     Let's make<br>something<br><em>great.</em>
   </h2>
@@ -356,5 +357,92 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="main.js"></script>
+
+<!-- ── ABOUT ME MOUSE TRAIL (scoped to #about only) ─────────────── -->
+<script>
+  (function () {
+    var trailImages = [
+      'assets/about-trail/image_trail_1.png',
+      'assets/about-trail/image_trail_2.png',
+      'assets/about-trail/image_trail_3.png',
+      'assets/about-trail/image_trail_4.png',
+      'assets/about-trail/image_trail_5.png',
+      'assets/about-trail/image_trail_6.png',
+      'assets/about-trail/image_trail_7.png',
+      'assets/about-trail/image_trail_8.png',
+      'assets/about-trail/image_trail_9.png',
+      'assets/about-trail/image_trail_10.png',
+      'assets/about-trail/image_trail_11.png',
+      'assets/about-trail/image_trail_12.png',
+    ];
+    for (var i = trailImages.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = trailImages[i]; trailImages[i] = trailImages[j]; trailImages[j] = tmp;
+    }
+
+    if (window.matchMedia('(pointer: fine)').matches &&
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+
+      var trailLayer = document.querySelector('.about-me__trail');
+      var aboutSection = document.querySelector('.about-me');
+      var lastX = null, lastY = null, imgIndex = 0;
+      var MIN_DISTANCE = 140;
+      var MAX_TRAIL_IMAGES = 6;
+      var activeImages = [];
+
+      aboutSection.addEventListener('mousemove', function (e) {
+        var rect = aboutSection.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+
+        if (lastX !== null) {
+          var dist = Math.hypot(x - lastX, y - lastY);
+          if (dist < MIN_DISTANCE) return;
+        }
+        lastX = x; lastY = y;
+
+        var img = document.createElement('img');
+        img.src = trailImages[imgIndex % trailImages.length];
+        imgIndex++;
+        img.className = 'about-me__trail-img';
+        img.style.left = x + 'px';
+        img.style.top = y + 'px';
+        img.style.transform = 'translate(-50%, -50%) rotate(' +
+          (Math.random() * 16 - 8) + 'deg) scale(0.8)';
+        trailLayer.appendChild(img);
+        activeImages.push(img);
+
+        gsap.to(img, { opacity: 1, scale: 1, duration: 0.35, ease: 'power2.out' });
+        gsap.to(img, {
+          opacity: 0, duration: 0.5, delay: 0.6, ease: 'power1.in',
+          onComplete: function () {
+            img.remove();
+            activeImages = activeImages.filter(function (el) { return el !== img; });
+          }
+        });
+
+        if (activeImages.length > MAX_TRAIL_IMAGES) {
+          var oldest = activeImages.shift();
+          gsap.to(oldest, { opacity: 0, duration: 0.3, onComplete: function () { oldest.remove(); } });
+        }
+      });
+
+      // Spec requires the trail to "fade out immediately rather than
+      // lingering" once the cursor leaves the section. The mousemove
+      // handler above only schedules a delayed fade (0.6s later), which
+      // isn't enough by itself if the cursor exits mid-delay — so this
+      // kills any pending tweens and fades every active image out fast.
+      aboutSection.addEventListener('mouseleave', function () {
+        activeImages.forEach(function (img) {
+          gsap.killTweensOf(img);
+          gsap.to(img, { opacity: 0, duration: 0.2, ease: 'power1.in', onComplete: function () { img.remove(); } });
+        });
+        activeImages = [];
+        lastX = null;
+        lastY = null;
+      });
+    }
+  })();
+</script>
 </body>
 </html>
