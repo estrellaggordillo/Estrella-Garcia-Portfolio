@@ -54,18 +54,6 @@
       overflow: hidden;
     }
 
-    /* ─── CTA BUTTON ──────────────────────────────────────────── */
-    .cta-fixed {
-      position: fixed; top: 18px; right: var(--pad-x); z-index: 300;
-      background: var(--ink); color: #fff; font-family: var(--title);
-      font-weight: 600; font-size: 14px; letter-spacing: -0.01em;
-      padding: 12px 22px; border-radius: 999px; white-space: nowrap;
-      transition: transform .2s, background .2s;
-      animation: fadeUp .7s cubic-bezier(.2,.8,.2,1) .1s both;
-    }
-    .cta-fixed:hover { background: #222; transform: scale(1.03); }
-    @media (max-width: 600px) { .cta-fixed { font-size: 12px; padding: 10px 16px; top: 14px; } }
-
     /* ─── TOP BAR ─────────────────────────────────────────────── */
     .top-bar {
       position: absolute; top: 0; left: 0; right: 0; z-index: 10;
@@ -222,33 +210,6 @@
       transition: background .15s, color .15s; display: block; text-align: center;
     }
     .burger-menu a:hover { background: rgba(255,255,255,.08); color: #fff; }
-
-    /* ─── TICKER STRIP ────────────────────────────────────────── */
-    .ticker-strip {
-      background: var(--ink); padding: 18px 0; overflow: hidden;
-    }
-    .ticker-track {
-      display: flex; width: max-content;
-      animation: tickerScroll 24s linear infinite;
-    }
-    .ticker-item {
-      display: flex; align-items: center; gap: 28px;
-      padding-right: 56px; white-space: nowrap;
-    }
-    .ticker-item span {
-      font-family: var(--display); font-weight: 700;
-      font-size: clamp(18px, 2vw, 26px);
-      letter-spacing: -0.01em; text-transform: uppercase;
-      color: rgba(255,255,255,.88);
-    }
-    .ticker-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--accent); flex-shrink: 0;
-    }
-    @keyframes tickerScroll {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
 
     /* ─── SHARED SECTION ──────────────────────────────────────── */
     .section { padding: clamp(64px, 8vw, 120px) clamp(20px, 2.5vw, 40px); }
@@ -468,43 +429,114 @@
 
     /* ─── CONTACT / FOOTER ────────────────────────────────────── */
     .contact {
-      background: var(--ink);
-      padding: clamp(80px, 10vw, 140px) var(--pad-x) clamp(40px, 5vw, 72px);
-      display: flex; flex-direction: column; gap: clamp(40px, 6vw, 64px);
+      background: var(--bg); /* same light gray as the rest of the page —
+                                no dark background */
+      padding: clamp(80px, 10vw, 160px) var(--pad-x)
+               clamp(40px, 5vw, 64px);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
+
+    /* Big heading — same font/style as .hero__headline (Big Shoulders
+       Display, weight 900, uppercase, tight tracking) */
     .contact__heading {
-      font-family: var(--display); font-weight: 900;
-      font-size: clamp(48px, 9.5vw, 132px);
-      line-height: .88; letter-spacing: -0.03em; text-transform: uppercase;
-      color: #fff; max-width: 14ch;
+      font-family: "Big Shoulders Display", sans-serif;
+      font-weight: 900;
+      font-size: clamp(48px, 9vw, 140px);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 0.9;
+      color: var(--ink);
+      margin: 0 0 clamp(40px, 6vw, 80px);
     }
-    .contact__heading em { color: var(--accent); font-style: normal; }
-    .contact__actions {
-      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+
+    /* Contact me label */
+    .contact__reach {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: clamp(48px, 7vw, 96px);
     }
-    .contact__email {
-      font-family: var(--title); font-weight: 700;
-      font-size: clamp(14px, 1.4vw, 19px); color: #fff; letter-spacing: -0.02em;
-      border-bottom: 1px solid rgba(255,255,255,.28); padding-bottom: 3px;
-      transition: border-color .2s, color .2s;
+
+    .contact__reach-label {
+      font-family: 'Figtree', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--ink-60);
+      margin: 0;
     }
-    .contact__email:hover { border-color: #fff; color: var(--accent); }
-    .contact__divider { width: 1px; height: 20px; background: rgba(255,255,255,.15); }
-    .contact__social { display: flex; gap: 16px; }
-    .contact__social-link {
-      font-family: var(--mono); font-size: 11px; letter-spacing: .08em;
-      text-transform: uppercase; color: rgba(255,255,255,.4);
-      transition: color .2s; border-bottom: 1px solid transparent; padding-bottom: 2px;
+
+    /* Email — bold, black, clearly clickable */
+    .contact__reach-email {
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700;
+      font-size: clamp(16px, 1.8vw, 22px);
+      color: var(--ink);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: opacity 0.2s;
     }
-    .contact__social-link:hover { color: #fff; border-color: rgba(255,255,255,.28); }
-    .contact__footer {
-      display: flex; justify-content: space-between; align-items: center;
-      border-top: 1px solid rgba(255,255,255,.09); padding-top: 24px;
-      flex-wrap: wrap; gap: 10px;
+    .contact__reach-email:hover { opacity: 0.65; }
+
+    /* Two pill buttons */
+    .contact__buttons {
+      display: flex;
+      gap: 12px;
+      margin-bottom: clamp(48px, 8vw, 120px);
     }
-    .contact__footer-copy {
-      font-family: var(--mono); font-size: 10px; letter-spacing: .06em;
-      text-transform: uppercase; color: rgba(255,255,255,.28);
+
+    .contact__btn {
+      font-family: 'Figtree', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--ink);
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      padding: 10px 28px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+      letter-spacing: 0.01em;
+    }
+    .contact__btn:hover {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    /* Bottom bar */
+    .contact__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--ink-20);
+      padding-top: 20px;
+    }
+
+    .contact__credit {
+      font-family: 'Figtree', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--ink-60);
+    }
+
+    .contact__back-top {
+      font-family: 'Figtree', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--ink);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: opacity 0.2s;
+    }
+    .contact__back-top:hover { opacity: 0.6; }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .contact__buttons { flex-direction: column; width: fit-content; }
+      .contact__bottom { flex-direction: column; gap: 12px;
+                         align-items: flex-start; }
     }
 
     /* ─── CARD HOVER EFFECTS ─────────────────────────────────── */
